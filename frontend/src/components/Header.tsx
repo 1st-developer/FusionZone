@@ -10,35 +10,37 @@ import {
   SheetContent,
   SheetDescription,
   SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { useNavigate } from "react-router-dom";
 
 
 function Header() {
 
+  const navigate = useNavigate();
+
   const [bell, setBell] = useState(false);
+  const [show, setShow] = useState(false);
+
   const toggleBell = () => {
     setBell((prev) => !prev);
+  }
+  const toggleShow = () => {
+    setShow((prev) => !prev);
   }
 
   return (
     <header>
         <div className="left">
-        <Sheet>
-          <SheetTrigger><IoMenu className="menu" /></SheetTrigger>
-            <SheetContent className="bg-[#050b1c] text-white border-none">
-              <SheetHeader>
-                <SheetDescription>
-                </SheetDescription>
-              </SheetHeader>
-            </SheetContent>
-          </Sheet>
+        <IoMenu onClick={() => navigate("/menu")} className="menu" />
         <h2>Musalsal cartoon anime</h2>
         </div>
 
         <div className="right">
-        <IoMdSearch className="icon" />
+        <div className="input-box">
+        <IoMdSearch onClick={toggleShow} className="search" />
+        <input className={`input ${show ? "show": ""}`} type="search" />
+        </div>
         <div onClick={toggleBell} className="bell">
         {bell ? <BiSolidBellRing className={`icon ${bell ? "blue": ""}`} /> : <BiSolidBellOff className="icon" />}
         <div className={`point ${bell ? "blue": ""}`}></div>

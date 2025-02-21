@@ -1,6 +1,13 @@
 import "../Styles/itemRight.scss"
 import { Button } from "./ui/button"
 import { IoLogOutOutline } from "react-icons/io5";
+import { Theme } from "./ui/theme";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
 function ItemRight() {
   return (
     <div className="item-right">
@@ -23,7 +30,10 @@ function ItemRight() {
         <Button>Favorite</Button>
         <Button>Downloads</Button>
         <Button>Adminators</Button>
-        <Button>Setting</Button>
+        <Popover>
+          <PopoverTrigger><Button>Setting</Button></PopoverTrigger>
+          <PopoverContent><Theme /></PopoverContent>
+        </Popover>
         <Button className="logout">Logout<IoLogOutOutline /></Button>
         </div>
       </div>

@@ -4,18 +4,20 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #09122C;
+    background: #fff;
+    box-shadow: 0 0 3px #bbb;
     position: fixed;
     z-index: 1;
     .menu {
       font-size: 2rem;
+      cursor: pointer;
     }
     .right, .left {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 1.5rem;
-      color: #f4f4f4;
+      color: #000;
       .icon {
         font-size: 1.5rem;
         cursor: pointer;
@@ -30,6 +32,33 @@ header {
     }
   }
   .right {
+    .input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      color: #000;
+      font-size: 1.5rem;
+      padding-right: 1rem;
+      border-bottom: 2px solid #000;
+      overflow: hidden;
+      .search {
+        position: absolute;
+        right: 0.5rem;
+      }
+      .input {
+        width: 30px;
+        height: 30px;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding-left: 20px;
+        font-size: 1.1rem;
+        transition: width 0.5 ease;
+        &.show {
+          width: 400px;
+        }
+      }
+    }
     .bell {
       position: relative;
       .point {
