@@ -1,7 +1,8 @@
 import {createBrowserRouter} from "react-router-dom"
 import Home from "./Pages/Home"
-import ItemLeft from "./components/about"
 import Body from "./Pages/Body"
+import Login from "./Pages/Auth/Login"
+import NotFound from "./Pages/notFound"
 
 
 const router = createBrowserRouter([
@@ -13,12 +14,25 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Body />
             },
+        ]
+    },
+    {
+        path: "/auth",
+        children: [
             {
-                path: "/menu",
-                element: <ItemLeft />
+                path: "sign-in",
+                element: <Login />
+            },
+            {
+                path: "sign-up",
+                element: <h1>Register</h1>
             }
         ]
     },
+    {
+        path: "*",
+        element: <NotFound />
+    }
 ])
 
 export default router

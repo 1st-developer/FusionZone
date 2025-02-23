@@ -1,20 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios, {AxiosError} from "axios"
 import { BASE_API_URL, DEFAULT_ERROR_MESSAGE } from "@/constants";
-import { IListPostResponse } from "@/types/post.type";
+import { IListUserResponse } from "@/types/user.type";
 
 
 const initialState = {
     loading: false,
-    data: {} as IListPostResponse,
+    data: {} as IListUserResponse,
     error: ""
 };
 
 
-export const postListFn = createAsyncThunk("post/list", async (_, {rejectWithValue}) => {
+export const userListFn = createAsyncThunk("users/list", async (_, {rejectWithValue}) => {
     try {
         
-        const res = await axios.get(`${BASE_API_URL}/posts/list`);
+        const res = await axios.get(`${BASE_API_URL}/users/list`);
         
         return res.data
         
@@ -27,31 +27,31 @@ export const postListFn = createAsyncThunk("post/list", async (_, {rejectWithVal
 
 });
 
-export const PostListSlice = createSlice({
-    name: "list posts",
+export const userListSlice = createSlice({
+    name: "list users",
     initialState,
     reducers: {
         logout: (state) => {
-            state.data = {} as IListPostResponse;
+            state.data = {} as IListUserResponse;
             state.error = "";
             state.loading = false;
         }
     },
     extraReducers(builder) {
-        builder.addCase(postListFn.pending, (state) => {
+        builder.addCase(userListFn.pending, (state) => {
             state.loading = true;
             state.error = "";
-            state.data = {} as IListPostResponse;
+            state.data = {} as IListUserResponse;
         });
-        builder.addCase(postListFn.fulfilled, (state, action) => {
+        builder.addCase(userListFn.fulfilled, (state, action) => {
             state.loading = false;
             state.error = "";
             state.data = action.payload
         });        
-        builder.addCase(postListFn.rejected, (state, action) => {
+        builder.addCase(userListFn.rejected, (state, action) => {
             state.loading = false;
             state.error = action.payload as string;
-            state.data = {} as IListPostResponse;
+            state.data = {} as IListUserResponse;
         });
     }
 });

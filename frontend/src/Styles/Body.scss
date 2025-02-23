@@ -1,60 +1,121 @@
-.home {
-    width: 100%;
-}
-
 .item {
-    width: 65%;
-    margin: 5rem auto auto auto;
+    width: 25rem;
+    margin: 5rem auto;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: 1fr;
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    .box {
-        width: 100%;
-        height: 60vh;
-        border-radius: 3px;
-        overflow: hidden;
-        .image {
-            width: 100%;
-            height: 70%;
-            border-bottom-right-radius: 3px;
-            border-bottom-left-radius: 3px;
-            user-select: none;
-            overflow: hidden;
-            img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: .3s ease;
-                cursor: pointer;
-                &:hover {
-                    scale: 1.03;
+    .creator {
+        display: grid;
+        gap: 1.5rem;
+        .main {
+            width: 112%;
+            position: relative;
+            right: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .class {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                .profile {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 30rem;
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: .3s;
+                        cursor: pointer;
+                        &:hover {
+                            scale: 1.1;
+                        }
+                    }
+                }
+                .name {
+                    font-size: 1rem;
+                    font-weight: bold;
+                    line-height: 1.1rem;
+                    font-family: "Playwrite IT Moderna", serif;
+                }
+                .email {
+                    font-size: 0.9rem;
+                    font-family: "Playwrite IT Moderna", serif;
                 }
             }
         }
-        .details {
+        .box {
             width: 100%;
-            height: 30%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            align-items: center;
-            .together {
-                display: flex;
-                gap: 1.2rem;
-                .tick {
-                    color: gray;
-                    font-weight: bold;
+            border-radius: 3px;
+            overflow: hidden;
+            .image {
+                width: 100%;
+                height: 60vh;
+                border-bottom-right-radius: 3px;
+                border-bottom-left-radius: 3px;
+                user-select: none;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: .3s ease;
+                    cursor: pointer;
+                    &:hover {
+                        scale: 1.03;
+                    }
                 }
             }
-            .name {
-                font-size: 2rem;
-                line-height: 2.5rem;
-                font-weight: bold;
+            .details {
+                width: 100%;
+                height: 20vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 1rem;
+                .together {
+                    display: flex;
+                    gap: 1.2rem;
+                    .tick {
+                        color: gray;
+                        font-weight: bold;
+                    }
+                }
+                .name {
+                    font-size: 2rem;
+                    line-height: 2.5rem;
+                    font-weight: bold;
+                }
+                .text {
+                    color: gray;
+                }
             }
-            .text {
-                color: gray;
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .item {
+        .creator {
+            .main {
+                right: 2rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 431px) {
+    .item {
+        width: 18rem;
+        .creator {
+            .box {
+                .image {
+                    height: 40vh;
+                }
             }
         }
     }

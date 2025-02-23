@@ -29,61 +29,75 @@ header {
   .left {
     h2 {
       font-size: 1.5rem;
+      font-weight: bold;
+    }
+  }
+  .home-icon {
+    .icon {
+      font-size: 1.5rem;
+      color: #000;
+      display: none;
     }
   }
   .right {
-    .input-box {
-      position: relative;
+    .self {
       display: flex;
       align-items: center;
-      color: #000;
-      font-size: 1.5rem;
-      padding-right: 1rem;
-      border-bottom: 2px solid #000;
-      overflow: hidden;
-      .search {
-        position: absolute;
-        right: 0.5rem;
-      }
-      .input {
-        width: 30px;
-        height: 30px;
-        background: transparent;
-        border: none;
-        outline: none;
-        padding-left: 20px;
-        font-size: 1.1rem;
-        transition: width 0.5 ease;
-        &.show {
-          width: 400px;
-        }
-      }
-    }
-    .bell {
-      position: relative;
-      .point {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        top: 0;
-        margin: auto;
-        z-index: -1;
-        width: 6px;
-        height: 6px;
-        background-color: rgb(21, 0, 255);
-        border-radius: 25px;
+      gap: 1.5rem;
+      .input-box {
+        position: relative;
         display: flex;
         align-items: center;
-        justify-content: center;
-        &.blue::before {
-          content: "";
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        color: #000;
+        font-size: 1.5rem;
+        padding-right: 1rem;
+        border-bottom: 2px solid #000;
+        overflow: hidden;
+        .search {
+          cursor: pointer;
+        }
+        .input {
+          width: 10px;
+          height: 30px;
+          background: transparent;
+          border: none;
+          outline: none;
+          padding: 10px;
+          font-size: 1.1rem;
+          transition: width 0.5 ease;
+          &.show {
+            width: 400px;
+          }
+        }
+      }
+      .bell {
+        position: relative;
+        .point {
           position: absolute;
-          width: 1px;
-          height: 1px;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          top: 0;
+          margin: auto;
+          z-index: -1;
+          width: 6px;
+          height: 6px;
           background-color: rgb(21, 0, 255);
           border-radius: 25px;
-          animation: loop 0.5s 0s;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &.blue::before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            background-color: rgb(21, 0, 255);
+            border-radius: 25px;
+            animation: loop 0.5s 0s;
+          }
         }
       }
     }
@@ -105,48 +119,29 @@ header {
 
 
 
-/* From Uiverse.io by JulanDeAlb */ 
-.hamburger {
-    cursor: pointer;
+@media (max-width: 768px) {
+  header {
+    .left {
+      h2 {
+        font-size: 1rem;
+      }
+    }
+    .home-icon {
+      .icon {
+        display: flex;
+      }
+    }
+    .right {
+      .self {
+        display: none;
+      }
+      .input-box {
+        .input {
+          &.show {
+            width: 250px;
+          }
+        }
+      }
+    }
   }
-  
-  .hamburger input {
-    display: none;
-  }
-  
-  .hamburger svg {
-    /* The size of the SVG defines the overall size */
-    height: 3em;
-    /* Define the transition for transforming the SVG */
-    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .line {
-    fill: none;
-    stroke: #f4f4f4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 3;
-    /* Define the transition for transforming the Stroke */
-    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-                stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .line-top-bottom {
-    stroke-dasharray: 12 63;
-  }
-  
-  .hamburger input:checked + svg {
-    transform: rotate(-45deg);
-  }
-  
-  .hamburger input:checked + svg .line-top-bottom {
-    stroke-dasharray: 20 300;
-    stroke-dashoffset: -32.42;
-  }
-  
-  .box {
-    border: none;
-    overflow: hidden;
-    border-radius: 5px;
-  }
+}

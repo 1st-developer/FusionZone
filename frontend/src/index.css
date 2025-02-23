@@ -4,6 +4,8 @@
 @layer base {
   .scroll-thin {
     height: 94vh;
+    border: none;
+    color: #fff;
     overflow-x: hidden;
     overflow-y: scroll;
   }

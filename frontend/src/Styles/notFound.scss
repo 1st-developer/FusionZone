@@ -1,0 +1,33 @@
+.not {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    background: #fff;
+    color: #000;
+    .span {
+        display: grid;
+        text-align: center;
+        h2 {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 4rem;
+        }
+        p {
+            color: gray;
+        }
+        button {
+            width: 200px;
+            height: 45px;
+            margin-top: 1rem;
+            background: #000;
+            color: #fff;
+            &:hover {
+                background: #222;
+            }
+        }
+    }
+}

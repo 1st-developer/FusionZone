@@ -7,15 +7,28 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { logout } from "@/redux/Auth/login.slice";
 
 function ItemRight() {
+  const loginState = useSelector((state: RootState) => state.loginSlice);
+  const dispatch = useDispatch<AppDispatch>();
+  const user = loginState.data?.user
+
+  const logoutHunddle = () => {
+    dispatch(logout())
+    window.location.reload();
+  }
+  
+
   return (
     <div className="item-right">
       <div className="profile">
         <div className="image">
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYOvDs-ry3nz6dC7R-Ut7z78f98QnTkD4bTsWCXman027r53vIrXhiMS7hJ6tUyMjb6mE&usqp=CAU" />
+          {user ? <img src={user.profile} />: <img src="/img/user.png" />}
         </div>
-        <div className="name">Mustafa Abdi</div>
+        {user ? <div className="name">{user.full_name}</div>: <div className="name">Your name</div>}
       </div>
       <div className="options">
         <div className="list">
@@ -34,7 +47,7 @@ function ItemRight() {
           <PopoverTrigger><Button>Setting</Button></PopoverTrigger>
           <PopoverContent><Theme /></PopoverContent>
         </Popover>
-        <Button className="logout">Logout<IoLogOutOutline /></Button>
+        <Button onClick={logoutHunddle} className="logout">Logout<IoLogOutOutline /></Button>
         </div>
       </div>
     </div>

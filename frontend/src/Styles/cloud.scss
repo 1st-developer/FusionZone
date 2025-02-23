@@ -1,0 +1,60 @@
+.cloud {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    .loader {
+        position: relative;
+        width: 140px;
+        height: 40px;
+        background: #000;
+        border-radius: 30rem;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 30rem;
+            background: #000;
+            bottom: 1rem;
+            left: 0.5rem;
+        }
+        &::after {
+            content: '';
+            position: absolute;
+            width: 6rem;
+            height: 6rem;
+            border-radius: 30rem;
+            background: #000;
+            bottom: 0;
+            right: 0.7rem;
+        }
+        .snow {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span {
+                width: 3px;
+                height: 3px;
+                border-radius: 30rem;
+                background: #000;
+                animation: rain 5s linear infinite;
+                animation-duration: calc(15s / var(--i));
+                transform-origin: bottom;
+            }
+        }
+    }
+}
+
+@keyframes rain {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(50px) scale(1);
+    }
+    100% {
+        transform: translateY(100px) scale(0);
+    }
+}

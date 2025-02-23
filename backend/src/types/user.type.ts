@@ -1,6 +1,5 @@
 export interface IRegisterUser {
     full_name: string;
-    phone_number: string;
     email: string;
     password: string;
     cornfirm_password: string;
@@ -15,7 +14,6 @@ export interface ILoginUser {
 export interface IListUser {
     id: number;
     full_name: string;
-    phone_number: string;
     email: string;
     password: string;
     created_At: Date;

@@ -1,0 +1,112 @@
+.form {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    .frame {
+        width: 30%;
+        box-shadow: 0 0 20px #f4f4f4;
+        .intro {
+            margin-top: 2rem;
+            text-align: center;
+            h2 {
+                font-size: 3rem;
+                font-weight: bold;
+            }
+            p {
+                font-size: 0.8rem;
+                line-height: 1.5rem;
+                color: gray;
+            }
+        }
+        .input-box {
+            width: 80%;
+            height: 50px;
+            margin: 2rem auto;
+            .error {
+                color: red;
+                font-weight: bold;
+            }
+            input {
+                width: 100%;
+                height: 100%;
+                border: none;
+                outline: none;
+                border-radius: 30rem;
+                border: 1px solid #bbb;
+                padding: 20px;
+                &::placeholder {
+                    color: gray;
+                }
+            }
+        }
+        .forgot {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            justify-content: flex-end;
+            a {
+                text-decoration: underline;
+            }
+        }
+        .login {
+            width: 80%;
+            margin: 1rem auto;
+            button {
+                width: 100%;
+                height: 45px;
+                background: #007f7d;
+                border-radius: 30rem;
+                color: #fff;
+                &:hover {
+                    background: #007775;
+                }
+            }
+        }
+        .another {
+            width: 80%;
+            margin: auto;
+            label {
+                display: flex;
+                font-size: 0.9rem;
+                gap: 5px;
+                a {
+                    color: #007f7d;
+                    font-weight: bold;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+        .footer {
+            width: 80%;
+            margin: 3rem auto auto;
+            gap: 1rem;
+            display: grid;
+            button {
+                width: 100%;
+                height: 45px;
+                border-radius: 30rem;
+                border: none;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .google {
+                background: #f4f4f4;
+                border: 2px solid gray;
+                color: #000;
+                &:hover {
+                    background: #fafafa;
+                }
+            }
+            .facebook {
+                background: #2e61ee;
+                color: #fff;
+                &:hover {
+                    background: #2b5bdf;
+                }
+            }
+        }
+    }
+}

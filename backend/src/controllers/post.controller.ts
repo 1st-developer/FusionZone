@@ -54,10 +54,20 @@ export const createPost = async (req: Request, res: Response) => {
 export const getAllPost = async (req: Request, res: Response) => {
     try {
 
-        const post = await prisma.posts.findMany();
+        const post = await prisma.posts.findMany({
+            include: {
+                user: {
+                    select: {
+                        id: true,
+                        email: true,
+                        full_name: true
+                    }
+                }
+            }
+        });
 
         res.status(201).json({
-            isSuccess: false,
+            isSuccess: true,
             Message: "Successfully received",
             post: post
         });

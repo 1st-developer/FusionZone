@@ -5,14 +5,16 @@ import { Provider } from 'react-redux'
 import './index.css'
 import App from './App'
 import { store } from './redux/store'
+import {Toaster} from "react-hot-toast"
 
 createRoot(document.getElementById('root')!).render(
-  <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
   <StrictMode>
+  <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
   < Provider store={store}>
+    <Toaster />
       <App /> 
     </Provider>
-  </StrictMode>
 </ThemeProvider>
+  </StrictMode>
 
 )
