@@ -1,128 +1,42 @@
 import "../Styles/Body.scss"
+import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch, RootState } from "@/redux/store"
+import { useEffect } from "react";
+import { postListFn } from "@/redux/slice/postList.slice";
+import Spinner from "@/components/ui/Spinner";
 function Body() {
+
+  const dispatch = useDispatch<AppDispatch>();
+  const postState = useSelector((state: RootState) => state.PostListSlice);
+  
+  
+  useEffect(() => {
+    dispatch(postListFn())
+  }, [dispatch])
+  
+  if(postState.loading) return <Spinner />
+  if(postState.error) return <p>{postState.error}</p>
+
+  const posts = postState.data?.post || [];
+
+
   return (
     <div className="item">
-            <div className="box">
-              <div className="image">
-                <img src="https://images5.alphacoders.com/124/1248632.png" />
+            {posts.map((u) => 
+            <div className="box" key={u.id}>
+            <div className="image">
+              <img src={`${u.profile}`} />
+              </div>
+              <div className="details">
+                <div className="name">{u.name}</div>
+                <div className="together">
+                <div className="text">{u.state}</div>
+                  <div className="tick">⭐ 6.55</div>
                 </div>
-                <div className="details">
-                  <div className="name">jujus kaison</div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://i0.wp.com/animeslayerweb.com/wp-content/uploads/2023/10/1697142791-7732-88336.jpg?resize=247,350" />
-                </div>
-                <div className="details">
-                  <div className="name">Black Clover</div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://i1.wp.com/animeslayerweb.com/wp-content/uploads/2023/10/1697134647-3123-111305.jpg?resize=247,350" />
-                </div>
-                <div className="details">
-                  <div className="name">Naruto: Shippuden</div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://i1.wp.com/animeslayerweb.com/wp-content/uploads/2023/10/1697142417-3210-99013.jpg?resize=247,350" />
-                </div>
-                <div className="details">
-                  <div className="name">Hunter x Hunter (2011)</div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://i2.wp.com/animeslayerweb.com/wp-content/uploads/2023/12/1701469709-3959-138381-1.jpg?resize=247,350" />
-                </div>
-                <div className="details">
-                  <div className="name">Solo leveling</div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://i1.wp.com/animeslayerweb.com/wp-content/uploads/2023/09/1695000525-3690-73245.jpg?resize=247,350" />
-                </div>
-                <div className="details">
-                  <div className="name">One Piece</div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://i3.wp.com/animeslayerweb.com/wp-content/uploads/2024/12/145502.jpg?resize=247,350" />
-                </div>
-                <div className="details">
-                  <div className="name">Solo leveling</div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://images5.alphacoders.com/124/1248632.png" />
-                </div>
-                <div className="details">
-                  <div className="name"></div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://images5.alphacoders.com/124/1248632.png" />
-                </div>
-                <div className="details">
-                  <div className="name"></div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-            <div className="box">
-              <div className="image">
-                <img src="https://images5.alphacoders.com/124/1248632.png" />
-                </div>
-                <div className="details">
-                  <div className="name"></div>
-                  <div className="together">
-                  <div className="text">Pending</div>
-                    <div className="tick">⭐ 6.55</div>
-                  </div>
-                </div>
-                </div>
-        </div>
+              </div>
+              </div>
+            )}
+      </div>
   )
 }
 
