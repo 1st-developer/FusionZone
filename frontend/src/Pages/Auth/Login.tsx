@@ -10,7 +10,6 @@ import * as yup from "yup"
 import { loginFn } from "@/redux/Auth/login.slice";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
-import { FcGoogle } from "react-icons/fc";
 import LoginSpinner from "@/components/ui/LoginSpinner";
 import { useGoogleLogin } from '@react-oauth/google';
 import axios from "axios";
@@ -131,7 +130,7 @@ const login = useGoogleLogin({
               </div>
               <div className="footer">
                 <Button type="button"><FaApple />Log in with Apple</Button>
-                <Button onClick={() => login()} className="google"><FcGoogle />Log in with google</Button>
+                <Button onClick={() => login()} className="google">Log in with google</Button>
                 <Button type="button" className="facebook"><FaFacebook />Log in with Facebook</Button>
               </div>
           </form>

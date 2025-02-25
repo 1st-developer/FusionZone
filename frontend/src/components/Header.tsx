@@ -15,9 +15,14 @@ import {
 } from "@/components/ui/sheet"
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { searchFn } from "@/redux/slice/search.slice";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
 
 
 function Header() {
+
+  const dispatch = useDispatch<AppDispatch>();
 
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -52,18 +57,24 @@ function Header() {
         <div className="right">
         <div className="self">
         <form
-    onSubmit={(e) => {
-        e.preventDefault();
-        if (name) {
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (name.trim()) {
+            dispatch(searchFn(name));
             navigate(`/search/${name}`);
-        }}}>
-    <div className="input-box">
-        <button type="submit"><IoMdSearch /></button>
-        <input
+          }
+        }}
+      >
+        <div className="input-box">
+          <button type="submit"><IoMdSearch /></button>
+          <input
             onChange={(e) => setName(e.target.value)}
-            type="search" placeholder="Search..."/>
-    </div>
-</form>
+            value={name}
+            type="search"
+            placeholder="Search..."
+          />
+        </div>
+      </form>
         <div onClick={toggleBell} className="bell">
         {bell ? <BiSolidBellRing className={`icon ${bell ? "blue": ""}`} /> : <BiSolidBellOff className="icon" />}
         <div className={`point ${bell ? "blue": ""}`}></div>

@@ -18,7 +18,9 @@ function Search() {
     const [filteredPosts, setFilteredPosts] = useState<any[]>([]);
 
     useEffect(() => {
-      dispatch(searchFn("some search term"));
+      if(name) {
+        dispatch(searchFn(name))
+      }
     }, [dispatch]);
 
     useEffect(() => {

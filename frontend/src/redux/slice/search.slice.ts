@@ -11,21 +11,21 @@ const initialState = {
 };
 
 
-export const searchFn = createAsyncThunk("search/list", async (searchTerm: string, {rejectWithValue}) => {
+export const searchFn = createAsyncThunk("search/list", async (searchTerm: string, { rejectWithValue }) => {
     try {
+
+        const res = await axios.get(`${BASE_API_URL}/search/list/${searchTerm}`); 
         
-        const res = await axios.get(`${BASE_API_URL}/search/list`, {params: { name: searchTerm }});
-        
-        return res.data
-        
+        return res.data;
+
     } catch (error) {
-        if(error instanceof AxiosError ) {
+        if (error instanceof AxiosError) {
             return rejectWithValue(error.response?.data.Message || DEFAULT_ERROR_MESSAGE);
         }
         return rejectWithValue(DEFAULT_ERROR_MESSAGE);
     }
-
 });
+
 
 export const searchSlice = createSlice({
     name: "list search",

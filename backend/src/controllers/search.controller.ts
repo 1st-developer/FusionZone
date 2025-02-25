@@ -1,22 +1,26 @@
 import { Request, Response } from "express";
 import { serverError } from "../error.messages";
 import { PrismaClient } from "@prisma/client";
+
 const prisma = new PrismaClient();
 
 export const searchPost = async (req: Request, res: Response) => {
     try {
-        const name = req.query.name as string;
+        const { name } = req.params; // استخراج name من الـ params
 
         if (!name || typeof name !== "string") {
             return res.status(400).json({
                 isSuccess: false,
-                Message: "Name is required and must be a string"
+                Message: "name is required and must be a string"
             });
         }
 
-        const findPost = await prisma.posts.findMany({
+        const findPost = await prisma.posts.findFirst({
             where: {
-                name: name.toLowerCase()
+                name: {
+                    contains: name,
+                    mode: "insensitive"
+                }
             }
         });
 
