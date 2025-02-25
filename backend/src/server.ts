@@ -7,10 +7,10 @@ import searchRouter from "./routes/search.router";
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
+
 app.use(cors({
     origin: "http://localhost:2025"
 }));
-
 
 app.use(express.json());
 app.use("/api/users", userRouter);

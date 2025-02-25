@@ -12,7 +12,8 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import LoginSpinner from "@/components/ui/LoginSpinner";
 import { useGoogleLogin } from '@react-oauth/google';
-import axios from "axios";
+import { FcGoogle } from "react-icons/fc";
+import { loginWithGoogleFn } from "@/redux/Auth/google.slice";
 
 function Login() {
 
@@ -83,24 +84,14 @@ useEffect(() => {
   }
 }, [loginState.error, loginState.data.isSuccess]);
 
-const login = useGoogleLogin({
+const googleLogin = useGoogleLogin({
   onSuccess: async (response) => {
-    try {
-
-      const res = axios.get("https://www.googleapis.com/oauth2/v3/userinfo",
-        {
-          headers: {
-            Authorization: `Bearer ${response.access_token}`,
-          },
-        }
-      );
-
-      console.log(res)
-
-    } catch (error) {
-      console.log(error)
-    }
+      dispatch(loginWithGoogleFn(response.access_token));
   },
+  onError: (error) => {
+      console.error("Google Login Failed:", error);
+      toast.error("فشل تسجيل الدخول باستخدام Google");
+  }
 });
 
   return (
@@ -130,7 +121,7 @@ const login = useGoogleLogin({
               </div>
               <div className="footer">
                 <Button type="button"><FaApple />Log in with Apple</Button>
-                <Button onClick={() => login()} className="google">Log in with google</Button>
+                <Button type="button" onClick={() => googleLogin()} className="google"><FcGoogle />Log in with google</Button>
                 <Button type="button" className="facebook"><FaFacebook />Log in with Facebook</Button>
               </div>
           </form>
