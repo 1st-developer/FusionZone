@@ -30,7 +30,7 @@ export const createPost = async (req: Request, res: Response) => {
             data: {
                 user_Id: data.user_Id,
                 profile: data.profile,
-                name: data.name,
+                name: data.name.toLowerCase(),
                 state: data.state
             }
         });

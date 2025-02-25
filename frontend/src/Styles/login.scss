@@ -110,3 +110,19 @@
         }
     }
 }
+
+@media (max-width: 768px) {
+    .form {
+        .frame {
+            width: 70%;
+        }
+    }
+}
+
+@media (max-width: 431px) {
+    .form {
+        .frame {
+            width: 100%;
+        }
+    }
+}

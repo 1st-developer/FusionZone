@@ -55,11 +55,11 @@ header {
         padding-right: 1rem;
         border-bottom: 2px solid #000;
         overflow: hidden;
-        .search {
+        button {
           cursor: pointer;
         }
-        .input {
-          width: 10px;
+        input {
+          width: 400px;
           height: 30px;
           background: transparent;
           border: none;
@@ -67,9 +67,6 @@ header {
           padding: 10px;
           font-size: 1.1rem;
           transition: width 0.5 ease;
-          &.show {
-            width: 400px;
-          }
         }
       }
       .bell {

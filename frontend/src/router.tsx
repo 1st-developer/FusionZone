@@ -3,6 +3,7 @@ import Home from "./Pages/Home"
 import Body from "./Pages/Body"
 import Login from "./Pages/Auth/Login"
 import NotFound from "./Pages/notFound"
+import Search from "./Pages/Search"
 
 
 const router = createBrowserRouter([
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
                 index: true,
                 element: <Body />
             },
+            {
+                path: "/search/:name",
+                element: <Search />
+            }
         ]
     },
     {

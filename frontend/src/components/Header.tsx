@@ -13,20 +13,31 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 
 function Header() {
 
-  const [bell, setBell] = useState(false);
-  const [show, setShow] = useState(false);
+  const [name, setName] = useState("");
+  const navigate = useNavigate();
 
+  const [bell, setBell] = useState(false);
+  
   const toggleBell = () => {
-    setBell((prev) => !prev);
-  }
-  const toggleShow = () => {
-    setShow((prev) => !prev);
-  }
+    setBell((prev) => {
+      const newState = !prev;
+      toast.dismiss();
+      if (newState) {
+        toast.success("You will be notified about new posts");
+      } else {
+        toast.error("You will not be notified about new posts");
+      }
+      return newState;
+    });
+  };
+  
+  
 
   return (
     <header>
@@ -40,10 +51,19 @@ function Header() {
 
         <div className="right">
         <div className="self">
-        <div className="input-box">
-        <IoMdSearch onClick={toggleShow} className="search" />
-        <input className={`input ${show ? "show": ""}`} type="search" placeholder="Search..." />
-        </div>
+        <form
+    onSubmit={(e) => {
+        e.preventDefault();
+        if (name) {
+            navigate(`/search/${name}`);
+        }}}>
+    <div className="input-box">
+        <button type="submit"><IoMdSearch /></button>
+        <input
+            onChange={(e) => setName(e.target.value)}
+            type="search" placeholder="Search..."/>
+    </div>
+</form>
         <div onClick={toggleBell} className="bell">
         {bell ? <BiSolidBellRing className={`icon ${bell ? "blue": ""}`} /> : <BiSolidBellOff className="icon" />}
         <div className={`point ${bell ? "blue": ""}`}></div>
