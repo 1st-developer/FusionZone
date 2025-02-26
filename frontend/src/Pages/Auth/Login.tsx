@@ -18,6 +18,8 @@ import { loginWithGoogleFn } from "@/redux/Auth/google.slice";
 function Login() {
 
   const loginState = useSelector((state: RootState) => state.loginSlice);
+  const googleLoginState = useSelector((state: RootState) => state.googleLoginSlice);
+  
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -43,7 +45,7 @@ useEffect(() => {
   if(loginState.error) {
       toast.error(loginState.error)
   }
-  if(loginState.data.isSuccess) {
+  if(loginState.data.isSuccess || googleLoginState.data && googleLoginState.data.token) {
     toast.custom((t) => (
       <div
         className={`${
@@ -55,16 +57,16 @@ useEffect(() => {
             <div className="flex-shrink-0 pt-0.5">
               <img
                 className="h-10 w-10 rounded-full"
-                src={loginState.data?.user?.profile}
+                src={loginState.data?.user?.profile || googleLoginState.data?.picture}
                 alt=""
               />
             </div>
             <div className="ml-3 flex-1">
               <p className="text-sm font-medium text-gray-900">
-                {loginState.data.user.full_name}
+                {loginState.data?.user?.full_name || googleLoginState.data?.name || "User"}
               </p>
               <p className="mt-1 text-sm text-gray-500">
-                {loginState.data.user.email}
+                {loginState.data?.user?.email || googleLoginState.data?.email || "no email"}
               </p>
             </div>
           </div>
@@ -81,8 +83,10 @@ useEffect(() => {
     ))
       localStorage.setItem("userData", JSON.stringify(loginState.data));
       navigate("/");
+  }else {
+    navigate("/auth/sign-in");
   }
-}, [loginState.error, loginState.data.isSuccess]);
+}, [loginState.error, loginState.data.isSuccess, googleLoginState]);
 
 const googleLogin = useGoogleLogin({
   onSuccess: async (response) => {
@@ -90,9 +94,10 @@ const googleLogin = useGoogleLogin({
   },
   onError: (error) => {
       console.error("Google Login Failed:", error);
-      toast.error("فشل تسجيل الدخول باستخدام Google");
+      toast.error("failed to log in google");
   }
 });
+
 
   return (
     <div className="form">

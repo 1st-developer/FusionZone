@@ -36,7 +36,7 @@ export const googleLoginSlice = createSlice({
     name: "login slice",
     initialState,
     reducers: {
-        logout: (state) => {
+        googleLogout: (state) => {
             state.loading = false;
             state.data = {} as IGoogleUserResponce;
             state.error = "";
@@ -61,4 +61,4 @@ export const googleLoginSlice = createSlice({
 });
 
 
-export const {logout} =  googleLoginSlice.actions;
+export const {googleLogout} =  googleLoginSlice.actions;

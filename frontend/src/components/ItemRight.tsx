@@ -13,8 +13,10 @@ import { logout } from "@/redux/Auth/login.slice";
 
 function ItemRight() {
   const loginState = useSelector((state: RootState) => state.loginSlice);
+  const googleLoginState = useSelector((state: RootState) => state.googleLoginSlice);
   const dispatch = useDispatch<AppDispatch>();
   const user = loginState.data?.user
+  const google = googleLoginState.data
 
   const logoutHunddle = () => {
     dispatch(logout())
@@ -26,9 +28,9 @@ function ItemRight() {
     <div className="item-right">
       <div className="profile">
         <div className="image">
-          {user ? <img src={user.profile} />: <img src="/img/user.png" />}
+          {user ? <img src={user.profile} />: google ? <img src={google.picture} />: <img src="/img/user.png" />}
         </div>
-        {user ? <div className="name">{user.full_name}</div>: <div className="name">Your name</div>}
+        {user ? <div className="name">{user.full_name}</div>: google ? <div className="name">{google.name}</div>: <div className="name">Your name</div>}
       </div>
       <div className="options">
         <div className="list">
