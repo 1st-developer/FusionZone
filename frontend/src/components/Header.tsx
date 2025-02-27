@@ -5,7 +5,6 @@ import { BiSolidBellRing } from "react-icons/bi";
 import { BiSolidBellOff } from "react-icons/bi";
 import { IoMdSearch } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
-import { FaHome } from "react-icons/fa";
 import {
   Sheet,
   SheetContent,
@@ -102,7 +101,7 @@ function Header() {
           <SheetContent className="scroll-thin bg-[#050b1c]" side={side}>
             <SheetHeader>
               <SheetDescription>
-              <ItemRight />
+                <ItemRight />
               </SheetDescription>
             </SheetHeader>
           </SheetContent>

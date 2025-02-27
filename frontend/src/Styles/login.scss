@@ -48,6 +48,14 @@
             a {
                 text-decoration: underline;
             }
+            label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 0.3rem;
+                accent-color: #000;
+                cursor: pointer;
+            }
         }
         .login {
             width: 80%;

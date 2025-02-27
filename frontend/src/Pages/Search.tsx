@@ -26,7 +26,7 @@ function Search() {
     if (searchState.loading) return <Spinner />;
     if (searchState.error) return <NotFound />
 
-    const posts = Array.isArray(searchState.data?.posts) ? searchState.data.posts : [searchState.data.posts];
+    const posts = searchState.data?.posts ? searchState.data.posts : [];
     const users = userState.data?.users || [];
 
     return (
@@ -65,8 +65,7 @@ function Search() {
               </div>
             </div>
           </div>
-        );
-      })}
+        )})}
     </div>
     );
 }

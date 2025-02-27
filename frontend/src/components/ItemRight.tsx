@@ -17,8 +17,7 @@ function ItemRight() {
   const user = loginState.data?.user
 
   const logoutHunddle = () => {
-    dispatch(logout())
-    window.location.reload();
+    dispatch(logout());
   }
   
   return (

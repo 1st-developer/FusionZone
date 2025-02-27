@@ -3,7 +3,7 @@ import { ILoginUserBody, ILoginUserResponce } from "@/types/login.type";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios, { AxiosError } from "axios";
 
-const DAFAULT_USER_DATA = localStorage.getItem("userData") ? JSON.parse(localStorage.getItem("userData")!) : {}
+const DAFAULT_USER_DATA = localStorage.getItem("loginData") ? JSON.parse(localStorage.getItem("loginData")!) : {}
 
 const initialState = {
     loading: false,
@@ -40,7 +40,7 @@ export const loginSlice = createSlice({
             state.data = {} as ILoginUserResponce;
             state.error = "";
 
-            localStorage.removeItem("userData");
+            localStorage.removeItem("loginData");
         }
     },
     extraReducers(builder) {

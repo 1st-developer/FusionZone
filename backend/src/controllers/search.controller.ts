@@ -9,10 +9,12 @@ export const searchPost = async (req: Request, res: Response) => {
         const { name } = req.params; 
 
         if (!name || typeof name !== "string") {
-            return res.status(400).json({
+            res.status(400).json({
                 isSuccess: false,
                 Message: "name is required and must be a string"
             });
+
+            return;
         }
 
         const findPost = await prisma.posts.findMany({
@@ -25,10 +27,12 @@ export const searchPost = async (req: Request, res: Response) => {
         });
 
         if (!findPost) {
-            return res.status(404).json({
+            res.status(404).json({
                 isSuccess: false,
                 Message: "Post not found!"
             });
+
+            return
         }
 
         res.status(200).json({

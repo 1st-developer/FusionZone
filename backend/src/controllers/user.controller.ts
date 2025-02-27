@@ -14,7 +14,7 @@ export const registerUser = async (req: Request, res: Response) => {
 
         // step(1) checking if password and cornfirm_password have the same value. 👇
 
-        if(data.password !== data.cornfirm_password) {
+        if(data.password !== data.confirm_password) {
             res.status(400).json({
                 isSuccess: false,
                 Message: notSame

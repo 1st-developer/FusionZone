@@ -60,8 +60,7 @@ function Body() {
               </div>
             </div>
           </div>
-        );
-      })}
+        )})}
     </div>
   );
 }

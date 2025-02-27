@@ -1,4 +1,4 @@
-import "../../Styles/loginSpinner.scss"
+import "../../Styles/goldenSpinner.scss"
 
 function LoginSpinner() {
   return (

@@ -4,6 +4,7 @@ import Body from "./Pages/Body"
 import Login from "./Pages/Auth/Login"
 import NotFound from "./Pages/notFound"
 import Search from "./Pages/Search"
+import Register from "./Pages/Auth/Register"
 
 
 const router = createBrowserRouter([
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "sign-up",
-                element: <h1>Register</h1>
+                element: <Register />
             }
         ]
     },
