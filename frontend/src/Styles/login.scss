@@ -78,36 +78,6 @@
                 }
             }
         }
-        .footer {
-            width: 80%;
-            margin: 3rem auto auto;
-            gap: 1rem;
-            display: grid;
-            button {
-                width: 100%;
-                height: 45px;
-                border-radius: 30rem;
-                border: none;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-            .google {
-                background: #f4f4f4;
-                border: 2px solid gray;
-                color: #000;
-                &:hover {
-                    background: #fafafa;
-                }
-            }
-            .facebook {
-                background: #2e61ee;
-                color: #fff;
-                &:hover {
-                    background: #2b5bdf;
-                }
-            }
-        }
     }
 }
 

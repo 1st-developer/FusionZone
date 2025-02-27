@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 
 export const searchPost = async (req: Request, res: Response) => {
     try {
-        const { name } = req.params; // استخراج name من الـ params
+        const { name } = req.params; 
 
         if (!name || typeof name !== "string") {
             return res.status(400).json({
@@ -15,7 +15,7 @@ export const searchPost = async (req: Request, res: Response) => {
             });
         }
 
-        const findPost = await prisma.posts.findFirst({
+        const findPost = await prisma.posts.findMany({
             where: {
                 name: {
                     contains: name,

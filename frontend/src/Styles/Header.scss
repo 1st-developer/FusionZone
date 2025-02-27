@@ -5,7 +5,6 @@ header {
     justify-content: space-between;
     align-items: center;
     background: #fff;
-    box-shadow: 0 0 3px #bbb;
     position: fixed;
     z-index: 1;
     .menu {
@@ -27,16 +26,38 @@ header {
       }
   }
   .left {
-    h2 {
-      font-size: 1.5rem;
+    a {
+      font-size: 1rem;
       font-weight: bold;
+      font-family: "Playwrite IT Moderna", serif;
     }
   }
-  .home-icon {
-    .icon {
-      font-size: 1.5rem;
+  .center-search {
+    display: none;
+    .input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row-reverse;
       color: #000;
-      display: none;
+      padding-right: 1rem;
+      border: 1px solid #bbb;
+      border-radius: 30rem;
+      overflow: hidden;
+      button {
+        cursor: pointer;
+      }
+      input {
+        width: 200px;
+        height: 30px;
+        background: transparent;
+        border: none;
+        outline: none;
+        padding: 10px;
+        font-size: 1rem;
+        transition: width 0.5 ease;
+      }
     }
   }
   .right {
@@ -118,15 +139,15 @@ header {
 
 @media (max-width: 768px) {
   header {
+    padding: 10px 0;
+    margin-left: 1rem;
     .left {
       h2 {
         font-size: 1rem;
       }
     }
-    .home-icon {
-      .icon {
-        display: flex;
-      }
+    .center-search {
+      display: flex;
     }
     .right {
       .self {

@@ -19,6 +19,9 @@ import { searchFn } from "@/redux/slice/search.slice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 
+const SHEET_SIDES = ["left"] as const
+type Header = (typeof SHEET_SIDES)[number]
+
 
 function Header() {
 
@@ -47,24 +50,36 @@ function Header() {
   return (
     <header>
         <div className="left">
-        <h2>FusionZone</h2>
+        <Link to="/">FusionZone</Link>
         </div>
 
-        <div className="home-icon">
-        <Link to="/"><FaHome className="icon" /></Link>
-        </div>
-
-        <div className="right">
-        <div className="self">
-        <form
-        onSubmit={(e) => {
+        <div className="center-search">
+        <form onSubmit={(e) => {
           e.preventDefault();
           if (name.trim()) {
             dispatch(searchFn(name));
             navigate(`/search/${name}`);
           }
-        }}
-      >
+        }}>
+        <div className="input-box">
+          <button type="submit"><IoMdSearch /></button>
+          <input
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            type="search"
+            placeholder="Search..."
+          />
+        </div>
+        </form>
+        </div>
+
+        <div className="right">
+        <div className="self">
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          if (name.trim()) {
+            dispatch(searchFn(name));
+            navigate(`/search/${name}`);}}}>
         <div className="input-box">
           <button type="submit"><IoMdSearch /></button>
           <input
@@ -80,16 +95,20 @@ function Header() {
         <div className={`point ${bell ? "blue": ""}`}></div>
         </div>
         </div>
-        <Sheet>
-          <SheetTrigger><IoMenu className="menu" /></SheetTrigger>
-            <SheetContent className="scroll-thin bg-[#050b1c]">
-              <SheetHeader>
-                <SheetDescription>
-                <ItemRight />
-                </SheetDescription>
-              </SheetHeader>
-            </SheetContent>
-          </Sheet>
+        <div className="grid grid-cols-2 gap-2">
+      {SHEET_SIDES.map((side) => (
+        <Sheet key={side}>
+        <SheetTrigger><IoMenu className="menu" /></SheetTrigger>
+          <SheetContent className="scroll-thin bg-[#050b1c]" side={side}>
+            <SheetHeader>
+              <SheetDescription>
+              <ItemRight />
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+      </Sheet>
+      ))}
+    </div>
         </div>
     </header>
   )

@@ -3,7 +3,6 @@ import { PostListSlice } from "./slice/postList.slice";
 import { userListSlice } from "./slice/userList.slice";
 import { loginSlice } from "./Auth/login.slice";
 import { searchSlice } from "./slice/search.slice";
-import { googleLoginSlice } from "./Auth/google.slice";
 
 export const store = configureStore({
     reducer: {
@@ -11,7 +10,6 @@ export const store = configureStore({
         userListSlice: userListSlice.reducer,
         loginSlice: loginSlice.reducer,
         searchSlice: searchSlice.reducer,
-        googleLoginSlice: googleLoginSlice.reducer,
     },
     devTools: true 
 });

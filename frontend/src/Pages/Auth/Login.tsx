@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Link, useNavigate } from "react-router-dom"
 import "../../Styles/login.scss"
-import { FaFacebook } from "react-icons/fa";
-import { FaApple } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import {useFormik} from "formik"
@@ -11,14 +9,10 @@ import { loginFn } from "@/redux/Auth/login.slice";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import LoginSpinner from "@/components/ui/LoginSpinner";
-import { useGoogleLogin } from '@react-oauth/google';
-import { FcGoogle } from "react-icons/fc";
-import { loginWithGoogleFn } from "@/redux/Auth/google.slice";
 
 function Login() {
 
   const loginState = useSelector((state: RootState) => state.loginSlice);
-  const googleLoginState = useSelector((state: RootState) => state.googleLoginSlice);
   
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
@@ -45,7 +39,7 @@ useEffect(() => {
   if(loginState.error) {
       toast.error(loginState.error)
   }
-  if(loginState.data.isSuccess || googleLoginState.data && googleLoginState.data.token) {
+  if(loginState.data.isSuccess) {
     toast.custom((t) => (
       <div
         className={`${
@@ -57,16 +51,16 @@ useEffect(() => {
             <div className="flex-shrink-0 pt-0.5">
               <img
                 className="h-10 w-10 rounded-full"
-                src={loginState.data?.user?.profile || googleLoginState.data?.picture}
+                src={loginState.data?.user?.profile}
                 alt=""
               />
             </div>
             <div className="ml-3 flex-1">
               <p className="text-sm font-medium text-gray-900">
-                {loginState.data?.user?.full_name || googleLoginState.data?.name || "User"}
+                {loginState.data?.user?.full_name}
               </p>
               <p className="mt-1 text-sm text-gray-500">
-                {loginState.data?.user?.email || googleLoginState.data?.email || "no email"}
+                {loginState.data?.user?.email}
               </p>
             </div>
           </div>
@@ -86,17 +80,7 @@ useEffect(() => {
   }else {
     navigate("/auth/sign-in");
   }
-}, [loginState.error, loginState.data.isSuccess, googleLoginState]);
-
-const googleLogin = useGoogleLogin({
-  onSuccess: async (response) => {
-      dispatch(loginWithGoogleFn(response.access_token));
-  },
-  onError: (error) => {
-      console.error("Google Login Failed:", error);
-      toast.error("failed to log in google");
-  }
-});
+}, [loginState.error, loginState.data.isSuccess]);
 
 
   return (
@@ -123,11 +107,6 @@ const googleLogin = useGoogleLogin({
               </div>
               <div className="another">
                 <label><p>Don't have an account?</p><Link to="/auth/sign-up">Sign Up</Link></label>
-              </div>
-              <div className="footer">
-                <Button type="button"><FaApple />Log in with Apple</Button>
-                <Button type="button" onClick={() => googleLogin()} className="google"><FcGoogle />Log in with google</Button>
-                <Button type="button" className="facebook"><FaFacebook />Log in with Facebook</Button>
               </div>
           </form>
         </div>
