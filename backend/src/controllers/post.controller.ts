@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { notFound, serverError } from "../error.messages";
 import { PostResponse } from "../types/post.type";
+import { AuthRequest } from "../types/request";
 const prisma = new PrismaClient();
 
 
@@ -71,6 +72,32 @@ export const getAllPost = async (req: Request, res: Response) => {
             Message: "Successfully received",
             post: post
         });
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            isSuccess: false,
+            Message: serverError
+        });
+    }
+}
+
+export const MyPosts = async (req: AuthRequest, res: Response) => {
+    try {
+
+        const findPost = await prisma.posts.findMany({
+            where: {
+                user_Id: req.userId
+            }
+        });
+        
+        res.status(201).json({
+            iSuccess: true,
+            Message: "Successfully received!",
+            user: req.userId,
+            posts: findPost
+        });
+        
         
     } catch (error) {
         console.log(error);

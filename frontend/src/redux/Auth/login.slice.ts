@@ -11,7 +11,7 @@ const initialState = {
     error: ""
 }
 
-export const loginFn = createAsyncThunk("users/login", async(data: ILoginUserBody, {rejectWithValue}) => {
+export const loginFn = createAsyncThunk("users/login", async (data: ILoginUserBody, {rejectWithValue}) => {
 
     try {
 

@@ -13,3 +13,20 @@ export interface Post {
     updated_At: Date;
     user_Id:    number;
 }
+
+export interface IListMyPostsResponse {
+    iSuccess: boolean;
+    Message:  string;
+    user:     number;
+    posts:    Post[];
+}
+
+export interface Post {
+    id:         string;
+    profile:    string;
+    name:       string;
+    state:      string;
+    created_At: Date;
+    updated_At: Date;
+    user_Id:    number;
+}

@@ -1,18 +1,22 @@
 import { BASE_API_URL, DEFAULT_ERROR_MESSAGE } from "@/constants";
-import { IUpdateProfileBody, IUpdateProfileResponse } from "@/types/profile.type";
+import { IListMyPostsResponse } from "@/types/post.type";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios, { AxiosError } from "axios";
 
 const initialState = {
     loading: false,
-    data: {} as IUpdateProfileResponse,
+    data: {} as IListMyPostsResponse,
     error: ""
 }
 
-export const updateProfileFn = createAsyncThunk("/profile/update", async (data: IUpdateProfileBody, {rejectWithValue}) => {
+export const getMyPostsFn = createAsyncThunk("/posts/my-posts", async (token: string, {rejectWithValue}) => {
     try {
 
-        const res = await axios.put(`${BASE_API_URL}/profile/update`, data);
+        const res = await axios.get(`${BASE_API_URL}/posts/my-posts`, {
+            headers: {
+                Authorization: `Bearar ${token}`
+            }
+        });
 
         return res.data
         
@@ -26,24 +30,24 @@ export const updateProfileFn = createAsyncThunk("/profile/update", async (data: 
 });
 
 
-export const updateProfileSlice = createSlice({
-    name: "update profile",
+export const getMyPostsSlice = createSlice({
+    name: "get my-posts",
     initialState,
     reducers:{},
     extraReducers:(builder) => {
-        builder.addCase(updateProfileFn.pending, (state) => {
+        builder.addCase(getMyPostsFn.pending, (state) => {
             state.loading = true;
-            state.data = {} as IUpdateProfileResponse;
+            state.data = {} as IListMyPostsResponse;
             state.error = "";
         });
-        builder.addCase(updateProfileFn.fulfilled, (state, action) => {
+        builder.addCase(getMyPostsFn.fulfilled, (state, action) => {
             state.loading = false;
-            state.data = action.payload as IUpdateProfileResponse;
+            state.data = action.payload as IListMyPostsResponse;
             state.error = "";
         });
-        builder.addCase(updateProfileFn.rejected, (state, action) => {
+        builder.addCase(getMyPostsFn.rejected, (state, action) => {
             state.loading = false;
-            state.data = {} as IUpdateProfileResponse,
+            state.data = {} as IListMyPostsResponse,
             state.error = action.payload as string;
         });
     }

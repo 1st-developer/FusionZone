@@ -5,6 +5,7 @@ import { loginSlice } from "./Auth/login.slice";
 import { searchSlice } from "./slice/search.slice";
 import { registerSlice } from "./Auth/register.slice";
 import { updateProfileSlice } from "./slice/profile.slice";
+import { getMyPostsSlice } from "./slice/my-post.slice";
 
 export const store = configureStore({
     reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
         searchSlice: searchSlice.reducer,
         registerSlice: registerSlice.reducer,
         updateProfileSlice: updateProfileSlice.reducer,
+        getMyPostsSlice: getMyPostsSlice.reducer,
     },
     devTools: true 
 });

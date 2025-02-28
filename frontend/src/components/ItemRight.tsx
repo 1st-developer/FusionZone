@@ -35,7 +35,7 @@ function ItemRight() {
       </div>
       <div className="options">
         <div className="list">
-        <Button>Home</Button>
+        <Button onClick={() => navigate("/")}>Home</Button>
         <Button>About</Button>
         <Button>Contact</Button>
         <Button>Services</Button>
