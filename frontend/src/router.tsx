@@ -5,6 +5,7 @@ import Login from "./Pages/Auth/Login"
 import NotFound from "./Pages/notFound"
 import Search from "./Pages/Search"
 import Register from "./Pages/Auth/Register"
+import Profile from "./Pages/Profile"
 
 
 const router = createBrowserRouter([
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
             {
                 index: true,
                 element: <Body />
+            },
+            {
+                path: "/profile",
+                element: <Profile />
             },
             {
                 path: "/search/:name",

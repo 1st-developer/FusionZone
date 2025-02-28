@@ -10,11 +10,16 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { logout } from "@/redux/Auth/login.slice";
+import { useNavigate } from "react-router-dom";
 
 function ItemRight() {
+
+  const navigate = useNavigate();
   const loginState = useSelector((state: RootState) => state.loginSlice);
+  const updateProfileState = useSelector((state: RootState) => state.updateProfileSlice);
   const dispatch = useDispatch<AppDispatch>();
   const user = loginState.data?.user
+  const profile = updateProfileState.data.Profile
 
   const logoutHunddle = () => {
     dispatch(logout());
@@ -23,8 +28,8 @@ function ItemRight() {
   return (
     <div className="item-right">
       <div className="profile">
-        <div className="image">
-          {user ? <img src={user.profile} />: <img src="/img/user.png" />}
+        <div onClick={() => navigate("/profile")} className="image">
+          {profile ? <img src={profile.profile} />: user ? <img src={user.profile} />: <h1>{loginState.data?.user?.full_name[0]?.toUpperCase()}</h1>}
         </div>
         {user ? <div className="name">{user.full_name}</div>: <div className="name">Your name</div>}
       </div>
@@ -40,7 +45,7 @@ function ItemRight() {
         <Button>Watched</Button>
         <Button>Favorite</Button>
         <Button>Downloads</Button>
-        <Button>Adminators</Button>
+        <Button>Profile</Button>
         <Popover>
           <PopoverTrigger><Button>Setting</Button></PopoverTrigger>
           <PopoverContent><Theme /></PopoverContent>
