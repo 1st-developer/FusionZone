@@ -1,6 +1,6 @@
 import { Button } from "./ui/button"
 import "../Styles/createPosts.scss"
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import {
   Select,
   SelectContent,
