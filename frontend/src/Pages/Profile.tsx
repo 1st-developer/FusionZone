@@ -8,10 +8,16 @@ import toast from "react-hot-toast";
 import { getMyPostsFn } from "@/redux/slice/my-post.slice";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import CreatePost from "@/components/createPost";
+
 
 function Profile() {
 
-  const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const loginState = useSelector((state: RootState) => state.loginSlice);
     const updateProfileState = useSelector((state: RootState) => state.updateProfileSlice);
@@ -63,7 +69,10 @@ function Profile() {
           <div className="margin">
 
           <div className="create-post">
-            <Button onClick={() => navigate("/posts/create")}>Create</Button>
+          <Popover>
+            <PopoverTrigger><Button>Create</Button></PopoverTrigger>
+              <PopoverContent className="w-[22rem]"><CreatePost /></PopoverContent>
+          </Popover>
           </div>
 
           {myPostsState.data?.posts?.map((my) => (

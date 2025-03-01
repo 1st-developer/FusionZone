@@ -1,0 +1,33 @@
+.hole {
+    .width {
+        display: grid;
+        gap: 1rem;
+        .image {
+            display: grid;
+            gap: 1rem;
+            img {
+                border-radius: 5px;
+            }
+            h2 {
+                font-size: 3rem;
+                text-align: center;
+            }
+        }
+        .add {
+            display: grid;
+            input {
+                width: 100%;
+                height: 40px;  
+                border-radius: 5px;
+                border: 1px solid #bbb;
+                padding-left: 15px;  
+                &::placeholder {
+                    color: gray;
+                }            
+            }
+            button {
+                margin-top: 1rem;
+            }
+        }
+    }
+}
