@@ -6,14 +6,13 @@ import { FaPlus } from "react-icons/fa6";
 import { updateProfileFn } from "@/redux/slice/profile.slice";
 import toast from "react-hot-toast";
 import { getMyPostsFn } from "@/redux/slice/my-post.slice";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
-import CreatePost from "@/components/createPost";
+import CreatePost from "@/components/CreatePost";
 
 
 function Profile() {
@@ -40,7 +39,8 @@ function Profile() {
       toast.success("Profile updated successfully");
       dispatch(updateProfileFn({
         id: loginState.data.user.id,
-        profile: img
+        profile: img,
+        token: loginState.data.token
       }));
     }
     dispatch(getMyPostsFn(token))
@@ -49,8 +49,11 @@ function Profile() {
   return (
     <div className="profile-page">
         <div className="self">
+          <div className="back-img">
+            {img ? <img src={img} />: <img src={updateProfileState.data?.Profile?.profile} />}
+          </div>
         <div className="circle">
-            <img src={updateProfileState.data?.Profile?.profile}/>
+        {img ? <img src={img} />: <img src={updateProfileState.data?.Profile?.profile} />}
             <span onClick={() => fileInputRef.current?.click()}><input 
         type="file" 
         accept="image/*" 

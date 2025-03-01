@@ -18,5 +18,6 @@ export interface Profile {
 export interface IUpdateProfileBody {
     id: number;
     profile: string;
+    token: string;
 }
 

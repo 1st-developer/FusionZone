@@ -1,6 +1,6 @@
 import "../Styles/itemRight.scss"
 import { Button } from "./ui/button"
-import { IoLogOutOutline } from "react-icons/io5";
+import { IoLogOut } from "react-icons/io5";
 import { Theme } from "./ui/theme";
 import {
   Popover,
@@ -50,7 +50,7 @@ function ItemRight() {
           <PopoverTrigger><Button>Setting</Button></PopoverTrigger>
           <PopoverContent><Theme /></PopoverContent>
         </Popover>
-        <Button onClick={logoutHunddle} className="logout">Logout<IoLogOutOutline /></Button>
+        <Button onClick={logoutHunddle} className="logout">Logout<IoLogOut /></Button>
         </div>
       </div>
     </div>

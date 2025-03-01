@@ -7,32 +7,18 @@ const prisma = new PrismaClient();
 
 
 
-export const createPost = async (req: Request, res: Response) => {
+export const createPost = async (req: AuthRequest, res: Response) => {
     try {
 
         const data: PostResponse = req.body;
-
-        const user = await prisma.users.findFirst({
-            where: {
-                id: data.user_Id
-            }
-        });
-
-        if(!user) {
-            res.status(400).json({
-                isSuccess: false,
-                Message: notFound
-            });
-
-            return;
-        }
+        const user_Id = req.userId;
 
         const post = await prisma.posts.create({
             data: {
-                user_Id: data.user_Id,
                 profile: data.profile,
                 name: data.name.toLowerCase(),
-                state: data.state
+                state: data.state,
+                user_Id: user_Id!
             }
         });
 

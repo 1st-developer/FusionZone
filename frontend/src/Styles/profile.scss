@@ -4,26 +4,45 @@
     display: grid;
     justify-content: center;
     .self {
+        position: relative;
         display: grid;
         gap: 1rem;
-        margin: 5rem auto auto;
-        .circle {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            margin: auto;
+        margin-top: 4rem;
+        .back-img {
+            position: absolute;
+            width: 100%;
+            height: 65%;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+            z-index: -1;
             img {
                 width: 100%;
                 height: 100%;
+                object-fit: cover;
+            }
+        }
+        .circle {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 30rem;
+            margin: 10rem auto auto;
+            img {
+                width: 85%;
+                height: 85%;
                 border-radius: 30rem;
                 object-fit: cover;
             }
             span {
                 position: absolute;
-                width: 1.2rem;
-                height: 1.2rem;
+                width: 1.5rem;
+                height: 1.5rem;
                 border-radius: 30rem;
-                right: 0;
+                right: 2rem;
                 bottom: -0.3rem;
                 background: #00dbd0;
                 display: flex;
@@ -34,7 +53,7 @@
                     background: #01c9bf;
                 }
                 label {
-                    font-size: 0.8rem;
+                    font-size: 1rem;
                     color: #fff;
                     cursor: pointer;
                 }
@@ -66,7 +85,7 @@
             .create-post {
                 width: 22rem;
                 height: 70vh;
-                border: 2px solid #000;
+                border: 2px dashed #000;
                 display: flex;
                 justify-content: center;
                 align-items: center;

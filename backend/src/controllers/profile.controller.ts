@@ -1,29 +1,29 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { serverError } from "../error.messages";
-import { IUpdateProfile } from "../types/profile.type";
+import { AuthRequest } from "../types/request";
 const prisma = new PrismaClient();
 
 
 
-export const updateProfile = async (req: Request, res: Response) => {
+export const updateProfile = async (req: AuthRequest, res: Response) => {
     try {
-
-        const {id, profile}: IUpdateProfile = req.body;
 
         const updated = await prisma.users.update({
             where: {
-                id: id
+                id: req.userId
             },
             data: {
-                profile: profile
+                profile: req.body.profile
             }
         });
+
+        const {password, ...rest} = updated;
 
         res.status(201).json({
             isSuccess: true,
             Message: "Profile Updated Successfully",
-            Profile: updated
+            Profile: rest
         });
         
     } catch (error) {

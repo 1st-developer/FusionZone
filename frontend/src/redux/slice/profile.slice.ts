@@ -12,7 +12,11 @@ const initialState = {
 export const updateProfileFn = createAsyncThunk("/profile/update", async (data: IUpdateProfileBody, {rejectWithValue}) => {
     try {
 
-        const res = await axios.put(`${BASE_API_URL}/profile/update`, data);
+        const res = await axios.put(`${BASE_API_URL}/profile/update`, data, {
+            headers: {
+                Authorization: `Bearar ${data.token}`
+            }
+        });
 
         return res.data
         

@@ -5,7 +5,7 @@ import { validationMiddleWere } from "../validations/validation.middlewere";
 import { authenticate } from "../validations/authenticate";
 const postRouter = Router();
 
-postRouter.post("/create",  postSchema, validationMiddleWere, createPost);
+postRouter.post("/create", authenticate,  postSchema, validationMiddleWere, createPost);
 postRouter.get("/list",  getAllPost);
 postRouter.get("/my-posts", authenticate, MyPosts);
 
