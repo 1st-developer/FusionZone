@@ -43,7 +43,7 @@
         .forgot {
             width: 80%;
             margin: auto;
-            display: flex;
+            display: grid;
             justify-content: flex-end;
             a {
                 text-decoration: underline;
@@ -54,7 +54,12 @@
                 align-items: center;
                 gap: 0.3rem;
                 accent-color: #000;
+                user-select: none;
                 cursor: pointer;
+            }
+            .error {
+                color: red;
+                font-weight: bold;
             }
         }
         .login {

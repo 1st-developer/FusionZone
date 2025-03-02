@@ -35,7 +35,7 @@ function Register() {
         full_name: yup.string().min(8, "Full name must be at least 8 characters").required("full_name is required"),
         email: yup.string().email("Please enter a valid email").required("Email is required"),
         password: yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
-        confirm_password: yup.string().min(8, "Confirm password must be at least 8 characters").required("Confirm password is required")
+        confirm_password: yup.string().oneOf([yup.ref("password")], "Passwords must match").min(8, "Confirm password must be at least 8 characters").required("Confirm password is required")
     }),
 });
 
@@ -72,10 +72,7 @@ useEffect(() => {
         <div className="flex border-l border-gray-200">
           <button
             onClick={() => toast.dismiss(t.id)}
-            className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          >
-            Close
-          </button>
+            className="w-full border border-transparent rounded-none rounded-r-lg p-4 flex items-center justify-center text-sm font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500">Close</button>
         </div>
       </div>
     ))}
@@ -86,7 +83,7 @@ useEffect(() => {
     <div className="form">
         <div className="frame">
         <div className="intro">
-        <h2>Sign In</h2>
+        <h2>Sign Up</h2>
         <p>Please enter your details.</p>
         </div>
           <form onSubmit={formik.handleSubmit}>

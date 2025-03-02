@@ -12,7 +12,7 @@ function Footer() {
         <div className="footer-options">
             <Link className="icons" to="/other"><BiSolidHome /></Link>
             <Link className="icons" to="/other"><FaUserFriends /></Link>
-            <Link className="icons" to="/other"><IoAddCircle /></Link>
+            <Link className="icons" to="/profile"><IoAddCircle /></Link>
             <Link className="icons" to="/other"><IoPersonSharp /></Link>
             <Link className="icons" to="/other"><BiSolidMessageDetail /></Link>
         </div>

@@ -2,7 +2,6 @@
 CREATE TABLE "Users" (
     "id" SERIAL NOT NULL,
     "full_name" TEXT NOT NULL,
-    "phone_number" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "profile" TEXT,
