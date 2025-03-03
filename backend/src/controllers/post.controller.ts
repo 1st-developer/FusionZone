@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
-import { notFound, serverError } from "../error.messages";
+import { serverError } from "../error.messages";
 import { PostResponse } from "../types/post.type";
 import { AuthRequest } from "../types/request";
 const prisma = new PrismaClient();
@@ -84,6 +84,47 @@ export const MyPosts = async (req: AuthRequest, res: Response) => {
             posts: findPost
         });
         
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            isSuccess: false,
+            Message: serverError
+        });
+    }
+}
+
+
+export const deletePost = async (req: AuthRequest, res: Response) => {
+    try {
+
+        const {id} = req.params;
+
+        const findPost = await prisma.posts.findFirst({
+            where: {
+                id: id
+            }
+        });
+
+        if(!findPost) {
+            res.status(400).json({
+                isSuccess: false,
+                Message: "Post not found!"
+            });
+
+            return;
+        }
+
+        const post = await prisma.posts.delete({
+            where: {
+                id: findPost?.id
+            }
+        });
+
+        res.status(201).json({
+            isSuccess: true,
+            Message: "Successfully delete the post"
+        });
         
     } catch (error) {
         console.log(error);
