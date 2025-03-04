@@ -115,7 +115,7 @@ export const deletePost = async (req: AuthRequest, res: Response) => {
             return;
         }
 
-        const post = await prisma.posts.delete({
+        await prisma.posts.delete({
             where: {
                 id: findPost?.id
             }

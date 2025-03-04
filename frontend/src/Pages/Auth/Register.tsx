@@ -1,14 +1,15 @@
 import { Button } from "@/components/ui/button"
 import { Link } from "react-router-dom"
-import "../../Styles/login.scss"
+import "../../Styles/register.scss"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import {useFormik} from "formik"
 import * as yup from "yup"
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import LoginSpinner from "@/components/ui/goldenSpinner";
 import { RegisterFn } from "@/redux/Auth/register.slice";
+import axios from "axios";
 
 function Register() {
 
@@ -27,7 +28,8 @@ function Register() {
             full_name: values.full_name,
             email: values.email,
             password: values.password,
-            confirm_password: values.confirm_password
+            confirm_password: values.confirm_password,
+            profile: img
         }
         dispatch(RegisterFn(data))
     },
@@ -78,10 +80,47 @@ useEffect(() => {
     ))}
 }, [registerState.error, registerState.data.isSuccess]);
 
+const fileInputRef = useRef<HTMLInputElement>(null);
+const [img, setImg] = useState("");
+
+    const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      try {
+        const file = e.target.files;
+        if (file && file[0]) {
+          const data = new FormData();
+          data.append("file", file[0]);
+          data.append("upload_preset", "my_cloudinary_store");
+          data.append("cloud_name", "dytzmdcdt");
+    
+          const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          
+          if (response.data.secure_url) {
+            setImg(response.data.secure_url);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
 
   return (
     <div className="form">
-        <div className="frame">
+        <div className="frame-two">
+          <div className="generate">
+            <div className="profile">
+              <img src={img} />
+            </div>
+            <input onChange={upload} type="file" accept="image/*" 
+        ref={fileInputRef} style={{display: "none"}} />
+            <Button onClick={() => fileInputRef.current?.click()}>Upload</Button>
+          </div>
         <div className="intro">
         <h2>Sign Up</h2>
         <p>Please enter your details.</p>

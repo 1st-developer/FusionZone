@@ -19,7 +19,7 @@ function ItemRight() {
   const updateProfileState = useSelector((state: RootState) => state.updateProfileSlice);
   const dispatch = useDispatch<AppDispatch>();
   const user = loginState.data?.user
-  const profile = updateProfileState.data.Profile
+  const profile = updateProfileState.data?.Profile
 
   const logoutHunddle = () => {
     dispatch(logout());

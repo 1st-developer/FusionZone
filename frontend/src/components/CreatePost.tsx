@@ -15,6 +15,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { createPostFn } from "@/redux/slice/createPost.slice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function CreatePost() {
 
@@ -28,12 +29,31 @@ function CreatePost() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [img, setImg] = useState("");
   
-      const upload = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.files && e.target.files[0]) {
-        const newImage = URL.createObjectURL(e.target.files[0]);
-        setImg(newImage); 
+  const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    try {
+      const file = e.target.files;
+      if (file && file[0]) {
+        const data = new FormData();
+        data.append("file", file[0]);
+        data.append("upload_preset", "my_cloudinary_store");
+        data.append("cloud_name", "dytzmdcdt");
+  
+        const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        
+        if (response.data.secure_url) {
+          setImg(response.data.secure_url);
+        }
       }
-    }; 
+    } catch (error) {
+      console.error(error);
+    }
+  }; 
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();

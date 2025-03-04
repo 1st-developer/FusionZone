@@ -3,11 +3,31 @@
     height: 100vh;
     display: flex;
     justify-content: center;
-    .frame {
+    .frame-two {
         width: 30%;
         box-shadow: 0 0 20px #f4f4f4;
+        display: grid;
+        .generate {
+            margin: auto;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            .profile {
+                width: 70px;
+                height: 70px;
+                border: 1px solid #bbb;
+                border-radius: 30rem;
+                margin: auto;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
         .intro {
-            margin-top: 2rem;
             text-align: center;
             h2 {
                 font-size: 3rem;

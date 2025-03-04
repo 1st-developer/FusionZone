@@ -13,6 +13,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import CreatePost from "@/components/CreatePost";
+import axios from "axios";
 
 
 function Profile() {
@@ -27,12 +28,32 @@ function Profile() {
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [img, setImg] = useState("");
 
-    const upload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const newImage = URL.createObjectURL(e.target.files[0]);
-      setImg(newImage); 
-    }
-  }; 
+    const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+      try {
+        const file = e.target.files;
+        if (file && file[0]) {
+          const data = new FormData();
+          data.append("file", file[0]);
+          data.append("upload_preset", "my_cloudinary_store");
+          data.append("cloud_name", "dytzmdcdt");
+    
+          const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          
+          if (response.data.secure_url) {
+            setImg(response.data.secure_url);
+          }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
 
   useEffect(() => {
     if (img) { 
@@ -46,14 +67,16 @@ function Profile() {
     dispatch(getMyPostsFn(token))
   }, [img]); 
 
+  const updated = updateProfileState.data?.Profile
+
   return (
     <div className="profile-page">
         <div className="self">
           <div className="back-img">
-            {img ? <img src={img} />: <img src={updateProfileState.data?.Profile?.profile} />}
+            {updated ? <img src={updated.profile} />: <img src={loginState.data?.user?.profile} />}
           </div>
-        <div className="circle">
-        {img ? <img src={img} />: <img src={updateProfileState.data?.Profile?.profile} />}
+        <div className="circle" style={{border: updateProfileState.data?.Profile?.profile ? "1px solid #bbb": ""}}>
+        {updated ? <img src={updated.profile} />: <img src={loginState.data?.user?.profile} />}
             <span onClick={() => fileInputRef.current?.click()}><input 
         type="file" 
         accept="image/*" 
