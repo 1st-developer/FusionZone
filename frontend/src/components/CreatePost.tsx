@@ -86,7 +86,7 @@ function CreatePost() {
       <div className="width">
         <div className="image">
           {img ? <div><video src={img}></video> <img src={img} /></div>: <h2>no image</h2>}
-          <input type="file" accept="image/* video/*" ref={fileInputRef} onChange={upload} style={{ display: "none" }} />
+          <input type="file" accept="image/*" ref={fileInputRef} onChange={upload} style={{ display: "none" }} />
           <Button type="button" onClick={() => fileInputRef.current?.click()}>Upload</Button>
         </div>
         <div className="add">
