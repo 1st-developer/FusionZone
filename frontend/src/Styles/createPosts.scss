@@ -3,7 +3,10 @@
         display: grid;
         gap: 1rem;
         .image {
-            display: grid;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             gap: 1rem;
             img {
                 border-radius: 5px;
@@ -11,6 +14,9 @@
             h2 {
                 font-size: 3rem;
                 text-align: center;
+            }
+            .upload-btn {
+                width: 100%;
             }
         }
         .add {

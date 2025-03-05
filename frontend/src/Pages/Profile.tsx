@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/popover"
 import CreatePost from "@/components/CreatePost";
 import axios from "axios";
+import GoldenSpinner from "@/components/ui/goldenSpinner";
 
 
 function Profile() {
@@ -27,11 +28,13 @@ function Profile() {
     
     const fileInputRef = useRef<HTMLInputElement>(null);
     const [img, setImg] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
       try {
         const file = e.target.files;
         if (file && file[0]) {
+          setLoading(true);
           const data = new FormData();
           data.append("file", file[0]);
           data.append("upload_preset", "my_cloudinary_store");
@@ -67,17 +70,18 @@ function Profile() {
     dispatch(getMyPostsFn(token))
   }, [img]); 
 
-  const updated = updateProfileState.data?.Profile
+  const updated = updateProfileState.data?.Profile || [];
+  const user = loginState.data?.user
 
   return (
     <div className="profile-page">
         <div className="self">
           <div className="back-img">
-            {updated ? <img src={updated.profile} />: <img src={loginState.data?.user?.profile} />}
+          {updated.profile ? <img src={updated.profile} />: user.profile ? <img src={user.profile} />: <h2>No Profile</h2>}
           </div>
-        <div className="circle" style={{border: updateProfileState.data?.Profile?.profile ? "1px solid #bbb": ""}}>
-        {updated ? <img src={updated.profile} />: <img src={loginState.data?.user?.profile} />}
-            <span onClick={() => fileInputRef.current?.click()}><input 
+        <div className="circle">
+        {loading ? <GoldenSpinner />: updated ? <img src={updated.profile} />: user.profile ? <img src={user.profile} />: <div className="first-word"><h2>{user.full_name[0].toUpperCase()}</h2></div>}
+        <span onClick={() => fileInputRef.current?.click()}><input 
         type="file" 
         accept="image/*" 
         ref={fileInputRef} 

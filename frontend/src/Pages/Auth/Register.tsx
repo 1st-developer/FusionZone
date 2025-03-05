@@ -7,9 +7,9 @@ import {useFormik} from "formik"
 import * as yup from "yup"
 import { useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import LoginSpinner from "@/components/ui/goldenSpinner";
 import { RegisterFn } from "@/redux/Auth/register.slice";
 import axios from "axios";
+import GoldenSpinner from "@/components/ui/goldenSpinner";
 
 function Register() {
 
@@ -43,7 +43,7 @@ function Register() {
 
 useEffect(() => {
   if(registerState.error) {
-      toast.error(registerState.error)
+      toast.error(registerState.error);
   }
   if(registerState.data.isSuccess) {
     toast.custom((t) => (
@@ -55,11 +55,7 @@ useEffect(() => {
         <div className="flex-1 w-0 p-4">
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
-              <img
-                className="h-10 w-10 rounded-full"
-                src={registerState.data?.user?.profile}
-                alt=""
-              />
+              {registerState.data?.user?.profile ? <img className="h-10 w-10 rounded-full object-cover" src={registerState.data?.user?.profile} />: <div className="h-10 w-10 rounded-full border flex justify-center items-center text-[1.5rem] font-bold"><h2>{registerState.data?.user?.full_name[0].toUpperCase()}</h2></div>}
             </div>
             <div className="ml-3 flex-1">
               <p className="text-sm font-medium text-gray-900">
@@ -82,11 +78,13 @@ useEffect(() => {
 
 const fileInputRef = useRef<HTMLInputElement>(null);
 const [img, setImg] = useState("");
+const [loading, setLoading] = useState(false);
 
     const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
       try {
         const file = e.target.files;
         if (file && file[0]) {
+          setLoading(true);
           const data = new FormData();
           data.append("file", file[0]);
           data.append("upload_preset", "my_cloudinary_store");
@@ -102,6 +100,7 @@ const [img, setImg] = useState("");
           
           if (response.data.secure_url) {
             setImg(response.data.secure_url);
+            setLoading(false);
           }
         }
       } catch (error) {
@@ -115,7 +114,7 @@ const [img, setImg] = useState("");
         <div className="frame-two">
           <div className="generate">
             <div className="profile">
-              <img src={img} />
+              {loading ? <GoldenSpinner />: img ? <img src={img} />: <h2>{formik.values?.full_name[0]?.toUpperCase()}</h2>}
             </div>
             <input onChange={upload} type="file" accept="image/*" 
         ref={fileInputRef} style={{display: "none"}} />
@@ -146,7 +145,7 @@ const [img, setImg] = useState("");
               <label><input type="checkbox" />Accept terms and conditions?</label>
             </div>
               <div className="login">
-                <Button type="submit" disabled={registerState.loading || !formik.isValid}>{registerState.loading ? <LoginSpinner />: "Sign Up"}</Button>
+                <Button type="submit" disabled={registerState.loading || !formik.isValid}>{registerState.loading ? <GoldenSpinner />: "Sign Up"}</Button>
               </div>
               <div className="another">
                 <label><p>Already have an account?</p><Link to="/auth/sign-in">Sign In</Link></label>

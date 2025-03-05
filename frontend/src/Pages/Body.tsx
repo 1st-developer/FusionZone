@@ -35,7 +35,7 @@ function Body() {
               <div className="main">
                 <div className="class">
                 <div className="profile">
-                  <img src={user.profile} alt={user.full_name} />
+                  <img src={user.profile} />
                 </div>
                 <div className="div">
                 <div className="name">{user.full_name}</div>

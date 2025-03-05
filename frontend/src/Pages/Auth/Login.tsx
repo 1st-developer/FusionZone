@@ -49,11 +49,7 @@ useEffect(() => {
         <div className="flex-1 w-0 p-4">
           <div className="flex items-start">
             <div className="flex-shrink-0 pt-0.5">
-              <img
-                className="h-10 w-10 rounded-full"
-                src={loginState.data?.user?.profile}
-                alt=""
-              />
+              {loginState.data?.user?.profile ? <img className="h-10 w-10 rounded-full object-cover" src={loginState.data?.user?.profile} />: <div className="h-10 w-10 rounded-full border flex justify-center items-center text-[1.5rem] font-bold"><h2>{loginState.data?.user?.full_name[0].toUpperCase()}</h2></div>}
             </div>
             <div className="ml-3 flex-1">
               <p className="text-sm font-medium text-gray-900">

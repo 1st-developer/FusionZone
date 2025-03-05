@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import "../Styles/Search.scss"
+import "../Styles/Body.scss"
 import { AppDispatch, RootState } from "@/redux/store"
 import { useEffect } from "react";
 import { searchFn } from "@/redux/slice/search.slice";

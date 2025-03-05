@@ -16,6 +16,7 @@ import { createPostFn } from "@/redux/slice/createPost.slice";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import GoldenSpinner from "./ui/goldenSpinner";
 
 function CreatePost() {
 
@@ -28,11 +29,13 @@ function CreatePost() {
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [img, setImg] = useState("");
+  const [loading, setLoading] = useState(false);
   
   const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file = e.target.files;
       if (file && file[0]) {
+        setLoading(true);
         const data = new FormData();
         data.append("file", file[0]);
         data.append("upload_preset", "my_cloudinary_store");
@@ -48,6 +51,7 @@ function CreatePost() {
         
         if (response.data.secure_url) {
           setImg(response.data.secure_url);
+          setLoading(false);
         }
       }
     } catch (error) {
@@ -85,9 +89,9 @@ function CreatePost() {
       <form onSubmit={handleSubmit}>
       <div className="width">
         <div className="image">
-          {img ? <div><video src={img}></video> <img src={img} /></div>: <h2>no image</h2>}
+          {loading ? <GoldenSpinner />: img ? <img src={img} />: <h2>no image</h2>}
           <input type="file" accept="image/*" ref={fileInputRef} onChange={upload} style={{ display: "none" }} />
-          <Button type="button" onClick={() => fileInputRef.current?.click()}>Upload</Button>
+          <Button className="upload-btn" type="button" onClick={() => fileInputRef.current?.click()}>Upload</Button>
         </div>
         <div className="add">
           <input onChange={(e) => setNameInput(e.target.value)} type="text" placeholder="add name" />

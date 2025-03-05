@@ -1,6 +1,6 @@
 import "../../Styles/goldenSpinner.scss"
 
-function LoginSpinner() {
+function GoldenSpinner() {
   return (
     <div>
         <div className="jelly-triangle">
@@ -21,4 +21,4 @@ function LoginSpinner() {
   )
 }
 
-export default LoginSpinner
+export default GoldenSpinner
