@@ -80,7 +80,7 @@ function Profile() {
           {updated.profile ? <img src={updated.profile} />: user.profile ? <img src={user.profile} />: <h2>No Profile</h2>}
           </div>
         <div className="circle">
-        {loading ? <GoldenSpinner />: updated ? <img src={updated.profile} />: user.profile ? <img src={user.profile} />: <div className="first-word"><h2>{user.full_name[0].toUpperCase()}</h2></div>}
+        {loading ? <GoldenSpinner />: updated.profile ? <img src={updated.profile} />: user.profile ? <img src={user.profile} />: <div className="first-word"><h2>{user.full_name[0].toUpperCase()}</h2></div>}
         <span onClick={() => fileInputRef.current?.click()}><input 
         type="file" 
         accept="image/*" 
