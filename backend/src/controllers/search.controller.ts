@@ -37,7 +37,7 @@ export const searchPost = async (req: Request, res: Response) => {
 
         res.status(200).json({
             isSuccess: true,
-            Message: "Successfully retrieved",
+            Message: "Successfully recieved",
             posts: findPost
         });
 

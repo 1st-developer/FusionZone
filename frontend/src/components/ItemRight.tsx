@@ -29,7 +29,7 @@ function ItemRight() {
     <div className="item-right">
       <div className="profile">
         <div onClick={() => navigate("/profile")} className="image">
-        {profile ? <img src={profile.profile} />: user ? <img src={user.profile} />: <div className="first-word"><h2>{loginState.data?.user?.full_name[0]?.toUpperCase()}</h2></div>}
+        {profile?.profile ? <img src={profile.profile} />: user?.profile ? <img src={user.profile} />: <div className="first-word"><h2>{loginState.data?.user?.full_name[0]?.toUpperCase()}</h2></div>}
         </div>
         {user ? <div className="name">{user.full_name}</div>: <div className="name">Your name</div>}
       </div>

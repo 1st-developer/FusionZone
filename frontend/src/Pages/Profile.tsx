@@ -17,7 +17,9 @@ import axios from "axios";
 import GoldenSpinner from "@/components/ui/goldenSpinner";
 import { Textarea } from "@/components/ui/textarea";
 import { AiOutlineLike } from "react-icons/ai";
-import { IoIosShareAlt, IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { PiShareFat } from "react-icons/pi";
+import { CiMenuKebab } from "react-icons/ci";
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 
@@ -86,11 +88,11 @@ function Profile() {
     <div className="profile-page">
         <div className="self">
           <div className="back-img">
-          {updated.profile ? <img src={updated.profile} />: user ? <img src={user.profile} />: <h2>No Profile</h2>}
+          {updated?.profile ? <img src={updated.profile} />: user?.profile ? <img src={user.profile} />: <h2>No Profile</h2>}
           </div>
         <div className="image-controller">
         <div className="circle">
-        {loading ? <GoldenSpinner />: updated.profile ? <img src={updated.profile} />: user ? <img src={user.profile} />: <div className="first-word"><h2>{loginState.data?.user?.full_name[0]?.toUpperCase()}</h2></div>}
+        {loading ? <GoldenSpinner />: updated?.profile ? <img src={updated.profile} />: user?.profile ? <img src={user.profile} />: <div className="first-word"><h2>{loginState.data?.user?.full_name[0]?.toUpperCase()}</h2></div>}
         <button disabled={loading} onClick={() => fileInputRef.current?.click()}><input 
         type="file" 
         accept="image/*" 
@@ -146,7 +148,8 @@ function Profile() {
                   <div className="reaction">
                   <button className="reaction-btn"><AiOutlineLike /></button>
                   <button className="reaction-btn"><IoMdHeartEmpty /></button>
-                  <button className="reaction-btn"><IoIosShareAlt /></button>
+                  <button className="reaction-btn"><PiShareFat /></button>
+                  <button className="reaction-btn"><CiMenuKebab /></button>
                   </div>
                   <div className="created-at">
                     {dayjs(my.created_At).fromNow(true)}
