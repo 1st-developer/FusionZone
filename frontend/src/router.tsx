@@ -6,6 +6,7 @@ import NotFound from "./Pages/notFound"
 import Search from "./Pages/Search"
 import Register from "./Pages/Auth/Register"
 import Profile from "./Pages/Profile"
+import OtherProfiles from "./Pages/otherProfiles"
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Profile />
+            },
+            {
+                path: "/other-profiles/:user_Id",
+                element: <OtherProfiles />
             },
             {
                 path: "/search/:name",

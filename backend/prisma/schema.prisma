@@ -24,7 +24,6 @@ model Posts {
   id String @id @default(uuid())
   profile String
   name String
-  state String
   created_At DateTime @default(now())
   updated_At DateTime @updatedAt
   user_Id Int

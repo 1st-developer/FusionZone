@@ -34,7 +34,7 @@ export const getMyPostsSlice = createSlice({
     name: "get my-posts",
     initialState,
     reducers:{},
-    extraReducers:(builder) => {
+    extraReducers(builder) {
         builder.addCase(getMyPostsFn.pending, (state) => {
             state.loading = true;
             state.data = {} as IListMyPostsResponse;

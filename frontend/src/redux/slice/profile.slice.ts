@@ -34,7 +34,7 @@ export const updateProfileSlice = createSlice({
     name: "update profile",
     initialState,
     reducers:{},
-    extraReducers:(builder) => {
+    extraReducers(builder) {
         builder.addCase(updateProfileFn.pending, (state) => {
             state.loading = true;
             state.data = {} as IUpdateProfileResponse;

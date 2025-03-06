@@ -15,6 +15,14 @@ import {
 import CreatePost from "@/components/CreatePost";
 import axios from "axios";
 import GoldenSpinner from "@/components/ui/goldenSpinner";
+import { Textarea } from "@/components/ui/textarea";
+import { AiOutlineLike } from "react-icons/ai";
+import { IoIosShareAlt, IoMdHeartEmpty } from "react-icons/io";
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+
+
+dayjs.extend(relativeTime);
 
 
 function Profile() {
@@ -101,7 +109,7 @@ function Profile() {
           <div className="create-post">
           <Popover>
             <PopoverTrigger><Button>Create</Button></PopoverTrigger>
-              <PopoverContent className="w-[22rem]"><CreatePost /></PopoverContent>
+              <PopoverContent className="w-[24.4rem]"><CreatePost /></PopoverContent>
           </Popover>
           </div>
 
@@ -111,11 +119,20 @@ function Profile() {
               <img src={my.profile} />
             </div>
             <div className="post-details">
-              <div className="name">{my.name}</div>
-              <div className="together">
-                <div className="state">{my.state}</div>
-                <div className="tick">⭐ 6.55</div>
-              </div>
+            <div className="name"><h2>{my.name}</h2></div>
+                <div className="together">
+                  <Textarea placeholder="Comment" />
+                  <div className="btns">
+                  <div className="reaction">
+                  <button className="reaction-btn"><AiOutlineLike /></button>
+                  <button className="reaction-btn"><IoMdHeartEmpty /></button>
+                  <button className="reaction-btn"><IoIosShareAlt /></button>
+                  </div>
+                  <div className="created-at">
+                    Created at: {dayjs(my.created_At).fromNow(true)} ago
+                  </div>
+                  </div>
+                </div>
             </div>
           </div>
           ))}

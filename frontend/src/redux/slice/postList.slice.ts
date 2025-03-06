@@ -30,13 +30,7 @@ export const postListFn = createAsyncThunk("post/list", async (_, {rejectWithVal
 export const PostListSlice = createSlice({
     name: "list posts",
     initialState,
-    reducers: {
-        logout: (state) => {
-            state.data = {} as IListPostResponse;
-            state.error = "";
-            state.loading = false;
-        }
-    },
+    reducers: {},
     extraReducers(builder) {
         builder.addCase(postListFn.pending, (state) => {
             state.loading = true;

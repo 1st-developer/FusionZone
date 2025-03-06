@@ -17,7 +17,6 @@ export const createPost = async (req: AuthRequest, res: Response) => {
             data: {
                 profile: data.profile,
                 name: data.name.toLowerCase(),
-                state: data.state,
                 user_Id: user_Id!
             }
         });
@@ -84,6 +83,41 @@ export const MyPosts = async (req: AuthRequest, res: Response) => {
             posts: findPost
         });
         
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({
+            isSuccess: false,
+            Message: serverError
+        });
+    }
+}
+
+export const getOtherPosts = async (req: Request, res: Response) => {
+    try {
+
+        const user_Id = req.params.user_Id;
+
+        const findPost = await prisma.posts.findMany({
+            where: {
+                user_Id: +user_Id
+            }
+        });
+
+        if(!findPost) {
+            res.status(400).json({
+                isSuccess: false,
+                Message: "Post not found!"
+            });
+
+            return;
+        }
+
+        res.status(200).json({
+            isSuccess: true,
+            Message: "Successfully received",
+            posts: findPost
+        });
         
     } catch (error) {
         console.log(error);

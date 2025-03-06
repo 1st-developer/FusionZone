@@ -4,20 +4,9 @@ export interface ICreatePostResponce {
     post:      Post;
 }
 
-export interface Post {
-    id:         string;
-    profile:    string;
-    name:       string;
-    state:      string;
-    created_At: Date;
-    updated_At: Date;
-    user_Id:    number;
-}
-
 export interface ICreatePostBody {
     profile: string,
     name: string,
-    state: string;
     token: string;
 }
 
@@ -26,16 +15,6 @@ export interface IListPostResponse {
     isSuccess: boolean;
     Message:   string;
     post:      Post[];
-}
-
-export interface Post {
-    id:         string;
-    profile:    string;
-    name:       string;
-    state:      string;
-    created_At: Date;
-    updated_At: Date;
-    user_Id:    number;
 }
 
 export interface IListMyPostsResponse {
@@ -49,7 +28,6 @@ export interface Post {
     id:         string;
     profile:    string;
     name:       string;
-    state:      string;
     created_At: Date;
     updated_At: Date;
     user_Id:    number;

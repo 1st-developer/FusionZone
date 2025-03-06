@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoldenSpinner from "./ui/goldenSpinner";
+import { Textarea } from "./ui/textarea";
 
 function CreatePost() {
 
@@ -25,7 +26,6 @@ function CreatePost() {
   const dispatch = useDispatch<AppDispatch>();
 
   const [nameInput, setNameInput] = useState("");
-  const [selectedValue, setSelectedValue] = useState("");
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [img, setImg] = useState("");
@@ -61,7 +61,7 @@ function CreatePost() {
 
     const handleSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      if (!nameInput || !selectedValue || !img) {
+      if (!nameInput || !img) {
         toast.error("Please fill in all fields and upload an image.");
         return;
       }else {
@@ -72,15 +72,12 @@ function CreatePost() {
         createPostFn({
           token: loginState.data.token,
           profile: img,
-          name: nameInput,
-          state: selectedValue,
-        })
-      );
+          name: nameInput
+        }));
   
       toast.success("Successfully created your post");
   
       setNameInput("");
-      setSelectedValue("");
       setImg("");
     };
 
@@ -94,21 +91,7 @@ function CreatePost() {
           <Button className="upload-btn" type="button" onClick={() => fileInputRef.current?.click()}>Upload</Button>
         </div>
         <div className="add">
-          <input onChange={(e) => setNameInput(e.target.value)} type="text" placeholder="add name" />
-
-        <Select onValueChange={(value) => { setSelectedValue(value)}}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select a state" />
-              </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectLabel>Pick up on of three state</SelectLabel>
-                  <SelectItem value="Pending">Pending</SelectItem>
-                <SelectItem value="Complete">Complete</SelectItem>
-              <SelectItem value="Under update">Under update</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+          <Textarea onChange={(e) => setNameInput(e.target.value)} placeholder="add name" />
         <Button type="submit">Save</Button>
         </div>
         </div>

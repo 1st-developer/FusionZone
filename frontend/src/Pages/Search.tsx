@@ -8,6 +8,14 @@ import { useParams } from "react-router-dom";
 import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
 import NotFound from "./notFound";
+import { AiOutlineLike } from "react-icons/ai";
+import { IoIosShareAlt, IoMdHeartEmpty } from "react-icons/io";
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import { Textarea } from "@/components/ui/textarea";
+
+
+dayjs.extend(relativeTime);
 
 function Search() {
     const dispatch = useDispatch<AppDispatch>();
@@ -57,12 +65,21 @@ function Search() {
                 <img src={post.profile}/>
               </div>
               <div className="details">
-                <div className="name">{post.name}</div>
+                <div className="name"><h2>{post.name}</h2></div>
                 <div className="together">
-                  <div className="text">{post.state}</div>
-                  <div className="tick">⭐ 6.55</div>
+                  <Textarea placeholder="Comment" />
+                  <div className="btns">
+                  <div className="reaction">
+                  <button className="reaction-btn"><AiOutlineLike /></button>
+                  <button className="reaction-btn"><IoMdHeartEmpty /></button>
+                  <button className="reaction-btn"><IoIosShareAlt /></button>
+                  </div>
+                  <div className="created-at">
+                    Created at: {dayjs(post.created_At).fromNow(true)} ago
                 </div>
-              </div>
+                </div>
+                </div>
+                </div>
             </div>
           </div>
         )})}
