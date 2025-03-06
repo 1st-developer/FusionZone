@@ -74,7 +74,7 @@ function Body() {
                   <button className="reaction-btn"><IoIosShareAlt /></button>
                   </div>
                   <div className="created-at">
-                    Created at: {dayjs(post.created_At).fromNow(true)} ago
+                    {dayjs(post.created_At).fromNow(true)}
                   </div>
                   </div>
                 </div>

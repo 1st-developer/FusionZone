@@ -9,6 +9,7 @@ import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { otherPostsFn } from "@/redux/slice/otherProfiles.slices";
 import { useParams } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
 
 dayjs.extend(relativeTime);
@@ -33,17 +34,37 @@ function OtherProfiles() {
           <div className="back-img">
           {<img src={findUser?.profile} />}
           </div>
+          <div className="image-controller">
         <div className="circle">
-            {<img src={findUser?.profile} />}
+        <img src={findUser?.profile} />
         </div>
         <div className="user-detail">
         <div className="user-name">{findUser?.full_name}</div>
-        <div className="user-email">{findUser?.email}</div>
+        <div className="about-me">
+          <div className="about-follow">
+          <div className="about-follow-div">
+            <h2>10</h2>
+            <p>Following</p>
+          </div>
+          <div className="about-follow-div">
+            <h2>2.5m</h2>
+            <p>Followers</p>
+          </div>
+          <div className="about-follow-div">
+            <h2>70m</h2>
+            <p>Likes</p>
+          </div>
+          </div>
+          <div className="about-edits">
+            <Button>Follow</Button>
+            <Button>Message</Button>
+          </div>
+        </div>
+        </div>
         </div>
         </div>
 
         <div className="my-post">
-          <div className="margin">
           {otherPostsState.data?.posts?.map((my) => (
             <div className="every" key={my.id}>
             <div className="image">
@@ -60,14 +81,13 @@ function OtherProfiles() {
                   <button className="reaction-btn"><IoIosShareAlt /></button>
                   </div>
                   <div className="created-at">
-                    Created at: {dayjs(my.created_At).fromNow(true)} ago
+                    {dayjs(my.created_At).fromNow(true)}
                   </div>
                   </div>
                 </div>
             </div>
           </div>
           ))}
-          </div>
         </div>
 
     </div>

@@ -1,17 +1,17 @@
 .profile-page {
-    width: 100%;
-    height: 100vh;
+    width: 90%;
     display: grid;
-    justify-content: center;
+    margin: auto;
     .self {
         position: relative;
         display: grid;
         gap: 1rem;
         margin-top: 4rem;
+        justify-content: flex-start;
         .back-img {
             position: absolute;
             width: 100%;
-            height: 65%;
+            height: 55%;
             border-radius: 20px 20px 0 0;
             overflow: hidden;
             display: flex;
@@ -28,95 +28,117 @@
                 object-fit: cover;
             }
         }
-        .circle {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            background: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 30rem;
-            margin: 10rem auto auto;
-            .first-word {
-                width: 85%;
-                height: 85%;
-                border-radius: 30rem;
-                border: 1px solid #bbb;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                h2 {
-                    font-weight: bold;
-                    font-size: 5rem;
-                    user-select: none;
-                }
-            }
-            img {
-                width: 85%;
-                height: 85%;
-                border-radius: 30rem;
-                user-select: none;
-                object-fit: cover;
-            }
-            span {
-                position: absolute;
-                width: 1.5rem;
-                height: 1.5rem;
-                border-radius: 30rem;
-                right: 2rem;
-                bottom: -0.3rem;
-                background: #00dbd0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                cursor: pointer;
-                &:hover {
-                    background: #01c9bf;
-                }
-                label {
-                    font-size: 1rem;
-                    color: #fff;
-                    cursor: pointer;
-                }
-            }
-        }
-        .user-detail {
+        .image-controller {
+            margin: 12rem 0 3rem 0;
             display: grid;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            .user-name {
-                font-size: 1.1rem;
-                font-weight: bold;
-                font-family: "Playwrite IT Moderna", serif;
+            gap: 1rem;
+            .circle {
+                position: relative;
+                width: 200px;
+                height: 200px;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 30rem;
+                margin: auto auto auto 5rem;
+                .first-word {
+                    width: 85%;
+                    height: 85%;
+                    border-radius: 30rem;
+                    border: 1px solid #bbb;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    h2 {
+                        font-weight: bold;
+                        font-size: 5rem;
+                        user-select: none;
+                    }
+                }
+                img {
+                    width: 85%;
+                    height: 85%;
+                    border-radius: 30rem;
+                    user-select: none;
+                    object-fit: cover;
+                }
+                button {
+                    position: absolute;
+                    width: 1.5rem;
+                    height: 1.5rem;
+                    border-radius: 30rem;
+                    right: 2rem;
+                    bottom: -0.3rem;
+                    background: #00dbd0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    &:hover {
+                        background: #01c9bf;
+                    }
+                    label {
+                        font-size: 1rem;
+                        color: #fff;
+                        cursor: pointer;
+                    }
+                }
             }
-            .user-email {
-                font-family: "Playwrite IT Moderna", serif;
+            .user-detail {
+                display: grid;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                gap: 0.5rem;
+                margin-left: 5rem;
+                .user-name {
+                    font-size: 1.1rem;
+                    font-weight: bold;
+                    font-family: "Playwrite IT Moderna", serif;
+                }
+                .about-me {
+                    display: grid;
+                    gap: 1rem;
+                    .about-follow {
+                        display: flex;
+                        gap: 1rem;
+                        font-weight: 900;
+                        margin: auto;
+                        p {
+                            font-weight: 500;
+                            font-size: 0.8rem;
+                            text-align: center;
+                        }
+                    }
+                    .about-edits {
+                        display: flex;
+                        gap: 1rem;
+                    }
+                }
             }
         }
     }
     .my-post {
         width: 100%;
-        .margin {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 2rem;
+        .create-post {
+            width: 25rem;
+            height: 72vh;
+            border: 2px dashed #000;
+            display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin: 4rem 0;
-            .create-post {
-                width: 25rem;
-                height: 70vh;
-                border: 2px dashed #000;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+            align-items: center;
+            border-radius: 5px;
+            button {
+                background: #aa0047;
                 border-radius: 5px;
-                button {
-                    background: #aa0047;
-                    border-radius: 5px;
-                }
             }
+        }
             .every {
                 width: 25rem;
                 display: grid;
@@ -164,7 +186,6 @@
                                 font-family: "Playwrite IT Moderna", serif;
                             }
                         }
-                    }
                     .name {
                         font-size: 1.5rem;
                         line-height: 2.5rem;

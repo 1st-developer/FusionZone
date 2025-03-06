@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { RegisterFn } from "@/redux/Auth/register.slice";
 import axios from "axios";
 import GoldenSpinner from "@/components/ui/goldenSpinner";
+import { FaPlus } from "react-icons/fa6";
 
 function Register() {
 
@@ -118,7 +119,7 @@ const [loading, setLoading] = useState(false);
             </div>
             <input onChange={upload} type="file" accept="image/*" 
         ref={fileInputRef} style={{display: "none"}} />
-            <Button onClick={() => fileInputRef.current?.click()}>Upload</Button>
+            <Button className="gen-photo-btn" onClick={() => fileInputRef.current?.click()}><FaPlus /></Button>
           </div>
         <div className="intro">
         <h2>Sign Up</h2>

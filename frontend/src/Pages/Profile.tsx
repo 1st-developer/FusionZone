@@ -58,6 +58,7 @@ function Profile() {
           
           if (response.data.secure_url) {
             setImg(response.data.secure_url);
+            setLoading(false);
           }
         }
       } catch (error) {
@@ -87,26 +88,45 @@ function Profile() {
           <div className="back-img">
           {updated.profile ? <img src={updated.profile} />: user ? <img src={user.profile} />: <h2>No Profile</h2>}
           </div>
+        <div className="image-controller">
         <div className="circle">
         {loading ? <GoldenSpinner />: updated.profile ? <img src={updated.profile} />: user ? <img src={user.profile} />: <div className="first-word"><h2>{loginState.data?.user?.full_name[0]?.toUpperCase()}</h2></div>}
-        <span onClick={() => fileInputRef.current?.click()}><input 
+        <button disabled={loading} onClick={() => fileInputRef.current?.click()}><input 
         type="file" 
         accept="image/*" 
         ref={fileInputRef} 
         onChange={upload} 
         style={{ display: "none" }}
-      /><label><FaPlus /></label></span>
+      /><label><FaPlus /></label></button>
         </div>
         <div className="user-detail">
         <div className="user-name">{loginState.data?.user?.full_name}</div>
-        <div className="user-email">{loginState.data?.user?.email}</div>
+        <div className="about-me">
+          <div className="about-follow">
+          <div className="about-follow-div">
+            <h2>10</h2>
+            <p>Following</p>
+          </div>
+          <div className="about-follow-div">
+            <h2>2.5m</h2>
+            <p>Followers</p>
+          </div>
+          <div className="about-follow-div">
+            <h2>70m</h2>
+            <p>Likes</p>
+          </div>
+          </div>
+          <div className="about-edits">
+            <Button>Edit profile</Button>
+            <Button>Share profile</Button>
+          </div>
+        </div>
+        </div>
         </div>
         </div>
 
         <div className="my-post">
-          <div className="margin">
-
-          <div className="create-post">
+        <div className="create-post">
           <Popover>
             <PopoverTrigger><Button>Create</Button></PopoverTrigger>
               <PopoverContent className="w-[24.4rem]"><CreatePost /></PopoverContent>
@@ -129,14 +149,13 @@ function Profile() {
                   <button className="reaction-btn"><IoIosShareAlt /></button>
                   </div>
                   <div className="created-at">
-                    Created at: {dayjs(my.created_At).fromNow(true)} ago
+                    {dayjs(my.created_At).fromNow(true)}
                   </div>
                   </div>
                 </div>
             </div>
           </div>
           ))}
-          </div>
         </div>
 
     </div>

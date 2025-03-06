@@ -4,7 +4,7 @@ import { AppDispatch, RootState } from "@/redux/store"
 import { useEffect } from "react";
 import { searchFn } from "@/redux/slice/search.slice";
 import Spinner from "@/components/ui/Spinner";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
 import NotFound from "./notFound";
@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 dayjs.extend(relativeTime);
 
 function Search() {
+  const navigate = useNavigate();
     const dispatch = useDispatch<AppDispatch>();
     const searchState = useSelector((state: RootState) => state.searchSlice);
     const userState = useSelector((state: RootState) => state.userListSlice);
@@ -47,7 +48,7 @@ function Search() {
             {user && (
               <div className="main">
                 <div className="class">
-                <div className="profile">
+                <div onClick={() => navigate(`/other-profiles/${user.id}`)} className="profile">
                   <img src={user.profile} />
                 </div>
                 <div className="div">
@@ -75,7 +76,7 @@ function Search() {
                   <button className="reaction-btn"><IoIosShareAlt /></button>
                   </div>
                   <div className="created-at">
-                    Created at: {dayjs(post.created_At).fromNow(true)} ago
+                    {dayjs(post.created_At).fromNow(true)}
                 </div>
                 </div>
                 </div>

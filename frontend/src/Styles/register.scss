@@ -8,14 +8,28 @@
         box-shadow: 0 0 20px #f4f4f4;
         display: grid;
         .generate {
+            position: relative;
             margin: auto;
             display: grid;
             justify-content: center;
             align-items: center;
             gap: 1rem;
+            .gen-photo-btn {
+                position: absolute;
+                width: 2rem;
+                height: 2rem;
+                border-radius: 30rem;
+                top: 6rem;
+                left: 5.5rem;
+                font-size: 1.5rem;
+                background: #007f7d;
+                &:hover {
+                    background: #007775;
+                }
+            }
             .profile {
-                width: 70px;
-                height: 70px;
+                width: 120px;
+                height: 120px;
                 border: 1px solid #bbb;
                 border-radius: 30rem;
                 margin: auto;
