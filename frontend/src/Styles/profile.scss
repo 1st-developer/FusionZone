@@ -202,8 +202,22 @@
 @media (max-width: 768px) {
     .profile-page {
         .my-post {
-            .margin {
-                grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .self {
+            .back-img {
+                height: 35%;
+            }
+            .image-controller {
+                margin: 5rem 0 3rem 7rem;
+                .circle {
+                    width: 100px;
+                    height: 100px;
+                    margin: auto auto auto 2rem;
+                }
+                .user-detail {
+                    margin-left: 0;
+                }
             }
         }
     }
@@ -212,9 +226,7 @@
 @media (max-width: 431px) {
     .profile-page {
         .my-post {
-            .margin {
-                grid-template-columns: 1fr;
-            }
+            grid-template-columns: 1fr;
         }
     }
 }
