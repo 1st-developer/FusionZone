@@ -58,16 +58,13 @@ function Header() {
           if (name.trim()) {
             dispatch(searchFn(name));
             navigate(`/search/${name}`);
+            setName(""); 
           }
         }}>
         <div className="input-box">
           <button type="submit"><IoMdSearch /></button>
           <input
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            type="search"
-            placeholder="Search..."
-          />
+            onChange={(e) => setName(e.target.value)} value={name} type="search" placeholder="Search..."/>
         </div>
         </form>
         </div>

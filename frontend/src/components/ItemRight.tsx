@@ -1,6 +1,13 @@
 import "../Styles/itemRight.scss"
 import { Button } from "./ui/button"
-import { IoLogOut } from "react-icons/io5";
+import { IoHome, IoLogOut } from "react-icons/io5";
+import { IoIosContact } from "react-icons/io";
+import { IoMdContact } from "react-icons/io";
+import { IoMdSettings } from "react-icons/io";
+import { MdAccountBalance } from "react-icons/md";
+import { MdOutlineHistory } from "react-icons/md";
+import { MdFavorite } from "react-icons/md";
+import { LiaDownloadSolid } from "react-icons/lia";
 import { Theme } from "./ui/theme";
 import {
   Popover,
@@ -35,22 +42,18 @@ function ItemRight() {
       </div>
       <div className="options">
         <div className="list">
-        <Button onClick={() => navigate("/")}>Home</Button>
-        <Button>About</Button>
-        <Button>Contact</Button>
-        <Button>Services</Button>
-        <Button>Account</Button>
-        <Button>News</Button>
-        <Button>Popular</Button>
-        <Button>Watched</Button>
-        <Button>Favorite</Button>
-        <Button>Downloads</Button>
-        <Button>Profile</Button>
+        <Button onClick={() => navigate("/")}><IoHome />Home</Button>
+        <Button><IoMdContact />Contact</Button>
+        <Button><MdAccountBalance />Account</Button>
+        <Button><MdOutlineHistory />History</Button>
+        <Button><MdFavorite />Favorite</Button>
+        <Button><LiaDownloadSolid />Downloads</Button>
+        <Button onClick={() => navigate("/profile")} ><IoIosContact />Profile</Button>
         <Popover>
-          <PopoverTrigger><Button>Setting</Button></PopoverTrigger>
+          <PopoverTrigger><Button><IoMdSettings />Setting</Button></PopoverTrigger>
           <PopoverContent><Theme /></PopoverContent>
         </Popover>
-        <Button onClick={logoutHunddle} className="logout">Logout<IoLogOut /></Button>
+        <Button onClick={logoutHunddle} className="logout"><IoLogOut /> Sign Out</Button>
         </div>
       </div>
     </div>

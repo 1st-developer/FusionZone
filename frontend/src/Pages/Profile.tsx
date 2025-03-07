@@ -47,7 +47,7 @@ function Profile() {
           setLoading(true);
           const data = new FormData();
           data.append("file", file[0]);
-          data.append("upload_preset", "my_cloudinary_store");
+          data.append("upload_preset", "my store");
           data.append("cloud_name", "dytzmdcdt");
     
           const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
@@ -128,7 +128,7 @@ function Profile() {
         </div>
 
         <div className="my-post">
-        <div className="create-post">
+        <div className="create-post" style={{height: myPostsState.data?.posts?.length ? "auto": "70vh"}}>
           <Popover>
             <PopoverTrigger><Button>Create</Button></PopoverTrigger>
               <PopoverContent className="w-[24.4rem]"><CreatePost /></PopoverContent>

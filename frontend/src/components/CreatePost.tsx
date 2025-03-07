@@ -1,15 +1,6 @@
 import { Button } from "./ui/button"
 import "../Styles/createPosts.scss"
 import { useRef, useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { createPostFn } from "@/redux/slice/createPost.slice";
@@ -18,6 +9,8 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoldenSpinner from "./ui/goldenSpinner";
 import { Textarea } from "./ui/textarea";
+import { Formik, useFormik } from "formik";
+import * as yup from "yup"
 
 function CreatePost() {
 
@@ -30,7 +23,7 @@ function CreatePost() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [img, setImg] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     try {
       const file = e.target.files;
@@ -38,7 +31,7 @@ function CreatePost() {
         setLoading(true);
         const data = new FormData();
         data.append("file", file[0]);
-        data.append("upload_preset", "my_cloudinary_store");
+        data.append("upload_preset", "my store");
         data.append("cloud_name", "dytzmdcdt");
   
         const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
@@ -50,7 +43,7 @@ function CreatePost() {
         );
         
         if (response.data.secure_url) {
-          setImg(response.data.secure_url);
+          formik.setFieldValue("profile", response.data.secure_url);
           setLoading(false);
         }
       }
@@ -59,39 +52,40 @@ function CreatePost() {
     }
   }; 
 
-    const handleSubmit = (e: React.FormEvent) => {
-      e.preventDefault();
-      if (!nameInput || !img) {
-        toast.error("Please fill in all fields and upload an image.");
-        return;
-      }else {
-        navigate("/");
-      }
-      
-      dispatch(
-        createPostFn({
+  const formik = useFormik({
+    initialValues: {
+      profile: "",
+      name: ""
+    },
+    onSubmit(values) {
+        const data = {
           token: loginState.data.token,
-          profile: img,
-          name: nameInput
-        }));
-  
-      toast.success("Successfully created your post");
-  
-      setNameInput("");
-      setImg("");
-    };
+          profile: values.profile,
+          name: values.name
+        }
+        dispatch(createPostFn(data))
+        toast.success("Successfully created your post");
+        navigate("/");
+    },
+    validationSchema: yup.object({
+      name: yup.string().min(1, "name must at least 1 characters").max(30, "name must be at most 30 characters").required("name is required!"),
+      profile: yup.string().required("profile is required!")
+    })
+});  
 
   return (
     <div className="hole">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={formik.handleSubmit}>
       <div className="width">
         <div className="image">
-          {loading ? <GoldenSpinner />: img ? <img src={img} />: <h2>no image</h2>}
+          {loading ? <GoldenSpinner />: formik.values.profile ? <img src={formik.values.profile} />: <h2>no image</h2>}
           <input type="file" accept="image/*" ref={fileInputRef} onChange={upload} style={{ display: "none" }} />
-          <Button className="upload-btn" type="button" onClick={() => fileInputRef.current?.click()}>Upload</Button>
+          <Button disabled={loading} className="upload-btn" type="button" onClick={() => fileInputRef.current?.click()}>Upload</Button>
         </div>
+        <p className="text-red-500 font-bold">{formik.errors.profile || formik.touched.profile}</p>
         <div className="add">
-          <Textarea onChange={(e) => setNameInput(e.target.value)} placeholder="add name" />
+          <Textarea onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} name="name" placeholder="add name" />
+          <p className="text-red-500 font-bold">{formik.errors.name || formik.touched.name}</p>
         <Button type="submit">Save</Button>
         </div>
         </div>

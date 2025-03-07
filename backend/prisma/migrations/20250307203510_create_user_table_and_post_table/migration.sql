@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "Users" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "full_name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -17,10 +17,9 @@ CREATE TABLE "Posts" (
     "id" TEXT NOT NULL,
     "profile" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "state" TEXT NOT NULL,
     "created_At" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updated_At" TIMESTAMP(3) NOT NULL,
-    "user_Id" INTEGER NOT NULL,
+    "user_Id" TEXT NOT NULL,
 
     CONSTRAINT "Posts_pkey" PRIMARY KEY ("id")
 );

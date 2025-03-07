@@ -100,7 +100,7 @@ export const getOtherPosts = async (req: Request, res: Response) => {
 
         const findPost = await prisma.posts.findMany({
             where: {
-                user_Id: +user_Id
+                user_Id: user_Id
             }
         });
 

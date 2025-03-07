@@ -12,7 +12,7 @@ const initialState = {
 }
 
 
-export const otherPostsFn = createAsyncThunk("list other posts", async(user_Id: number, {rejectWithValue}) => {
+export const otherPostsFn = createAsyncThunk("list other posts", async(user_Id: string, {rejectWithValue}) => {
     try {
 
         const res = await axios.get(`${BASE_API_URL}/posts/other-posts/${user_Id}`);

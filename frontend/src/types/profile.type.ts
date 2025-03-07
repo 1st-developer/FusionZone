@@ -5,10 +5,9 @@ export interface IUpdateProfileResponse {
 }
 
 export interface Profile {
-    id:         number;
+    id:         string;
     full_name:  string;
     email:      string;
-    password:   string;
     profile:    string;
     created_At: Date;
     updated_At: Date;
@@ -16,7 +15,7 @@ export interface Profile {
 }
 
 export interface IUpdateProfileBody {
-    id: number;
+    id: string;
     profile: string;
     token: string;
 }

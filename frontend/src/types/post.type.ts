@@ -20,7 +20,7 @@ export interface IListPostResponse {
 export interface IListMyPostsResponse {
     iSuccess: boolean;
     Message:  string;
-    user:     number;
+    user:     string;
     posts:    Post[];
 }
 
@@ -30,5 +30,5 @@ export interface Post {
     name:       string;
     created_At: Date;
     updated_At: Date;
-    user_Id:    number;
+    user_Id:    string;
 }

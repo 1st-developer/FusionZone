@@ -9,7 +9,7 @@ datasource db {
 
 
 model Users {
-  id Int @id @default(autoincrement())
+  id String @id @default(uuid())
   full_name String
   email String @unique
   password String
@@ -26,6 +26,6 @@ model Posts {
   name String
   created_At DateTime @default(now())
   updated_At DateTime @updatedAt
-  user_Id Int
+  user_Id String
   user Users @relation(fields: [user_Id], references: [id])
 }

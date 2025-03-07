@@ -11,5 +11,5 @@ export interface Posts {
     state:      string;
     created_At: Date;
     updated_At: Date;
-    user_Id:    number;
+    user_Id:    string;
 }

@@ -6,7 +6,7 @@ export interface ILoginUserResponce {
 }
 
 export interface User {
-    id:         number;
+    id:         string;
     full_name:  string;
     email:      string;
     profile:    string;

@@ -22,10 +22,10 @@ function OtherProfiles() {
     const listUsersState = useSelector((state: RootState) => state.userListSlice);
 
     const {user_Id} = useParams();
-    const findUser = listUsersState.data?.users?.find((u) => u.id === Number(user_Id))
+    const findUser = listUsersState.data?.users?.find((u) => u.id === user_Id)
 
     useEffect(() => {
-        dispatch(otherPostsFn(Number(user_Id)));
+        dispatch(otherPostsFn(user_Id!));
     }, [])
 
   return (

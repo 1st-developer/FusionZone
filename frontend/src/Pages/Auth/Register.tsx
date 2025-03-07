@@ -88,7 +88,7 @@ const [loading, setLoading] = useState(false);
           setLoading(true);
           const data = new FormData();
           data.append("file", file[0]);
-          data.append("upload_preset", "my_cloudinary_store");
+          data.append("upload_preset", "my store");
           data.append("cloud_name", "dytzmdcdt");
     
           const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
@@ -119,7 +119,7 @@ const [loading, setLoading] = useState(false);
             </div>
             <input onChange={upload} type="file" accept="image/*" 
         ref={fileInputRef} style={{display: "none"}} />
-            <Button className="gen-photo-btn" onClick={() => fileInputRef.current?.click()}><FaPlus /></Button>
+            <Button disabled={loading} className="gen-photo-btn" onClick={() => fileInputRef.current?.click()}><FaPlus /></Button>
           </div>
         <div className="intro">
         <h2>Sign Up</h2>
