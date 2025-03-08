@@ -52,7 +52,7 @@ function Body() {
 
   return (
     <div className="item">
-      {posts.map((post) => {
+      {posts?.map((post) => {
         const user = users.find((u) => u.id === post.user_Id);
 
         return (

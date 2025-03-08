@@ -203,12 +203,12 @@ export const getAllUsers = async (req: Request, res: Response) => {
     try {
         const users: IListUser[] = await prisma.users.findMany();
 
-        const sanitizedUsers = users.map(({ password, ...rest }) => rest);
+        const rest = users.map(({ password, ...rest }) => rest);
 
         res.status(200).json({
             isSuccess: true,
             message: "Users retrieved successfully",
-            users: sanitizedUsers
+            users: rest
         });
 
     } catch (error) {
