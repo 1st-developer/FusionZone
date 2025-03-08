@@ -35,13 +35,13 @@ function Search() {
     if (searchState.loading) return <Spinner />;
     if (searchState.error) return <NotFound />
 
-    const posts = searchState.data?.posts ? searchState.data.posts : [];
-    const users = userState.data?.users || [];
+    const posts = searchState.data?.posts;
+    const users = userState.data?.users;
 
     return (
         <div className="item">
-      {posts.map((post) => {
-        const user = users.find((u) => u.id === post.user_Id);
+      {posts.length ? posts?.map((post) => {
+        const user = users?.find((u) => u.id === post.user_Id);
 
         return (
           <div className="creator" key={post.id}>
@@ -83,7 +83,7 @@ function Search() {
                 </div>
             </div>
           </div>
-        )})}
+        )}): <NotFound />}
     </div>
     );
 }

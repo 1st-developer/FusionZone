@@ -15,8 +15,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { searchFn } from "@/redux/slice/search.slice";
-import { useDispatch } from "react-redux";
-import { AppDispatch } from "@/redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
 
 const SHEET_SIDES = ["left"] as const
 type Header = (typeof SHEET_SIDES)[number]
@@ -25,6 +25,11 @@ type Header = (typeof SHEET_SIDES)[number]
 function Header() {
 
   const dispatch = useDispatch<AppDispatch>();
+  const loginState = useSelector((state: RootState) => state.loginSlice);
+  const updateProfileState = useSelector((state: RootState) => state.updateProfileSlice);
+
+  const user = loginState.data?.user
+  const profile = updateProfileState.data?.Profile
 
   const [name, setName] = useState("");
   const navigate = useNavigate();
@@ -49,28 +54,13 @@ function Header() {
   return (
     <header>
         <div className="left">
-        <Link to="/">FusionZone</Link>
+        <Link to="/profile">
+        <div className="profile">
+         {profile?.profile ?  <img src={profile.profile} /> : user?.profile ?  <img src={user.profile} />: <h2>{user?.full_name[0]?.toUpperCase()}</h2>}
+        </div>
+        </Link>
         </div>
 
-        <div className="center-search">
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          if (name.trim()) {
-            dispatch(searchFn(name));
-            navigate(`/search/${name}`);
-            setName(""); 
-          }
-        }}>
-        <div className="input-box">
-          <button type="submit"><IoMdSearch /></button>
-          <input
-            onChange={(e) => setName(e.target.value)} value={name} type="search" placeholder="Search..."/>
-        </div>
-        </form>
-        </div>
-
-        <div className="right">
-        <div className="self">
         <form onSubmit={(e) => {
           e.preventDefault();
           if (name.trim()) {
@@ -78,14 +68,12 @@ function Header() {
             navigate(`/search/${name}`);}}}>
         <div className="input-box">
           <button type="submit"><IoMdSearch /></button>
-          <input
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            type="search"
-            placeholder="Search..."
-          />
+          <input onChange={(e) => setName(e.target.value)} value={name} type="search" placeholder="Search..."/>
         </div>
       </form>
+
+        <div className="right">
+        <div className="self">
         <div onClick={toggleBell} className="bell">
         {bell ? <BiSolidBellRing className={`icon ${bell ? "blue": ""}`} /> : <BiSolidBellOff className="icon" />}
         <div className={`point ${bell ? "blue": ""}`}></div>
