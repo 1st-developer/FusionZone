@@ -11,6 +11,9 @@ import { RegisterFn } from "@/redux/Auth/register.slice";
 import axios from "axios";
 import GoldenSpinner from "@/components/ui/goldenSpinner";
 import { FaPlus } from "react-icons/fa6";
+import { IoLockClosed } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
+import { IoPerson } from "react-icons/io5";
 
 function Register() {
 
@@ -128,18 +131,22 @@ const [loading, setLoading] = useState(false);
           <form onSubmit={formik.handleSubmit}>
             <div className="input-box">
               <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.full_name} name="full_name" type="text" placeholder="Full name" />
+              <label><IoPerson /></label>
             <p className="error">{formik.touched.full_name && formik.errors.full_name}</p>
             </div>
             <div className="input-box">
               <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} name="email" type="email" placeholder="Email" />
+              <label><MdEmail /></label>
             <p className="error">{formik.touched.email && formik.errors.email}</p>
             </div>
             <div className="input-box">
               <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.password} name="password" type="password" placeholder="Password" />
+              <label><IoLockClosed /></label>
             <p className="error">{formik.touched.password && formik.errors.password}</p>
             </div>
             <div className="input-box">
               <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.confirm_password} name="confirm_password" type="password" placeholder="Confirm password" />
+              <label><IoLockClosed /></label>
             <p className="error">{formik.touched.confirm_password && formik.errors.confirm_password}</p>
             </div>
             <div className="forgot">

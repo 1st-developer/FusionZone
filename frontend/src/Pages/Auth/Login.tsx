@@ -9,6 +9,8 @@ import { loginFn } from "@/redux/Auth/login.slice";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import LoginSpinner from "@/components/ui/goldenSpinner";
+import { IoLockClosed } from "react-icons/io5";
+import { MdEmail } from "react-icons/md";
 
 function Login() {
 
@@ -87,10 +89,12 @@ useEffect(() => {
           <form onSubmit={formik.handleSubmit}>
             <div className="input-box">
               <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} name="email" type="email" placeholder="Email" />
+              <label><MdEmail /></label>
             <p className="error">{formik.touched.email && formik.errors.email}</p>
             </div>
             <div className="input-box">
               <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.password} name="password" type="password" placeholder="Password" />
+              <label><IoLockClosed /></label>
             <p className="error">{formik.touched.password && formik.errors.password}</p>
             </div>
             <div className="forgot">

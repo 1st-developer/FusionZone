@@ -13,6 +13,12 @@ import { Textarea } from "@/components/ui/textarea"
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { useNavigate } from "react-router-dom";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+
 
 
 dayjs.extend(relativeTime);
@@ -71,7 +77,10 @@ function Body() {
                   <div className="reaction">
                   <button className="reaction-btn"><AiOutlineLike /></button>
                   <button className="reaction-btn"><IoMdHeartEmpty /></button>
-                  <button className="reaction-btn"><IoIosShareAlt /></button>
+                  <Popover>
+                    <PopoverTrigger><button className="reaction-btn"><IoIosShareAlt /></button></PopoverTrigger>
+                    <PopoverContent></PopoverContent>
+                  </Popover>
                   </div>
                   <div className="created-at">
                     {dayjs(post.created_At).fromNow(true)}

@@ -60,20 +60,27 @@
             }
         }
         .input-box {
+            position: relative;
             width: 80%;
             height: 50px;
             margin: 2rem auto;
+            border-radius: 30rem;
+            border: 1px solid #bbb;
+            overflow: hidden;
+            label {
+                position: absolute;
+                right: 1rem;
+                top: 1rem;
+            }
             .error {
                 color: red;
                 font-weight: bold;
             }
             input {
-                width: 100%;
+                width: 95%;
                 height: 100%;
                 border: none;
                 outline: none;
-                border-radius: 30rem;
-                border: 1px solid #bbb;
                 padding: 20px;
                 &::placeholder {
                     color: gray;
