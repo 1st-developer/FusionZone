@@ -9,10 +9,19 @@ import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
 import NotFound from "./notFound";
 import { AiOutlineLike } from "react-icons/ai";
-import { IoIosShareAlt, IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeartEmpty } from "react-icons/io";
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { PiShareFat } from "react-icons/pi";
+import { FaFacebookF, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 
 
 dayjs.extend(relativeTime);
@@ -38,9 +47,11 @@ function Search() {
     const posts = searchState.data?.posts;
     const users = userState.data?.users;
 
+    const shareUrl = window.location.href
+
     return (
         <div className="item">
-      {posts.length ? posts?.map((post) => {
+      {posts?.length ? posts?.map((post) => {
         const user = users?.find((u) => u.id === post.user_Id);
 
         return (
@@ -73,7 +84,23 @@ function Search() {
                   <div className="reaction">
                   <button className="reaction-btn"><AiOutlineLike /></button>
                   <button className="reaction-btn"><IoMdHeartEmpty /></button>
-                  <button className="reaction-btn"><IoIosShareAlt /></button>
+                  <Popover>
+                    <PopoverTrigger><button className="reaction-btn relative top-1"><PiShareFat /></button></PopoverTrigger>
+                    <PopoverContent className="flex gap-4">
+                      <TelegramShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-cyan-500 text-white flex justify-center items-center cursor-pointer text-2xl"><FaTelegramPlane /></button>
+                      </TelegramShareButton>
+                      <FacebookShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-blue-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaFacebookF /></button>
+                      </FacebookShareButton>
+                      <WhatsappShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-green-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaWhatsapp /></button>
+                      </WhatsappShareButton>
+                      <TwitterShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-cyan-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaXTwitter /></button>
+                      </TwitterShareButton>
+                    </PopoverContent>
+                  </Popover>
                   </div>
                   <div className="created-at">
                     {dayjs(post.created_At).fromNow(true)}

@@ -22,6 +22,9 @@ import { PiShareFat } from "react-icons/pi";
 import { CiMenuKebab } from "react-icons/ci";
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
+import { FaFacebookF, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 
 
 dayjs.extend(relativeTime);
@@ -81,8 +84,10 @@ function Profile() {
     dispatch(getMyPostsFn(token))
   }, [img]); 
 
-  const updated = updateProfileState.data?.Profile || [];
+  const updated = updateProfileState.data?.Profile;
   const user = loginState.data?.user
+
+  const shareUrl = window.location.href
 
   return (
     <div className="profile-page">
@@ -148,7 +153,23 @@ function Profile() {
                   <div className="reaction">
                   <button className="reaction-btn"><AiOutlineLike /></button>
                   <button className="reaction-btn"><IoMdHeartEmpty /></button>
-                  <button className="reaction-btn"><PiShareFat /></button>
+                  <Popover>
+                    <PopoverTrigger><button className="reaction-btn relative top-1"><PiShareFat /></button></PopoverTrigger>
+                    <PopoverContent className="flex gap-4">
+                      <TelegramShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-cyan-500 text-white flex justify-center items-center cursor-pointer text-2xl"><FaTelegramPlane /></button>
+                      </TelegramShareButton>
+                      <FacebookShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-blue-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaFacebookF /></button>
+                      </FacebookShareButton>
+                      <WhatsappShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-green-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaWhatsapp /></button>
+                      </WhatsappShareButton>
+                      <TwitterShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-cyan-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaXTwitter /></button>
+                      </TwitterShareButton>
+                    </PopoverContent>
+                  </Popover>
                   <button className="reaction-btn"><CiMenuKebab /></button>
                   </div>
                   <div className="created-at">

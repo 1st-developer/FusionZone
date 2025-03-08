@@ -7,7 +7,6 @@ import Spinner from "@/components/ui/Spinner";
 import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
 import { IoMdHeartEmpty } from "react-icons/io";
-import { IoIosShareAlt } from "react-icons/io";
 import { AiOutlineLike } from "react-icons/ai";
 import { Textarea } from "@/components/ui/textarea"
 import dayjs from "dayjs"
@@ -18,6 +17,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { PiShareFat } from "react-icons/pi";
+import { FaTelegramPlane } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 
 
 
@@ -39,8 +44,11 @@ function Body() {
   if (postState.error) return <p className="text-red-600 text-xl">{postState.error}</p>;
   if (userState.error) return <p className="text-red-600 text-xl">{userState.error}</p>;
 
-  const posts = postState.data?.post || [];
-  const users = userState.data?.users || [];
+  const posts = postState.data?.post;
+  const users = userState.data?.users;
+
+
+  const shareUrl = window.location.href
 
   return (
     <div className="item">
@@ -78,8 +86,21 @@ function Body() {
                   <button className="reaction-btn"><AiOutlineLike /></button>
                   <button className="reaction-btn"><IoMdHeartEmpty /></button>
                   <Popover>
-                    <PopoverTrigger><button className="reaction-btn"><IoIosShareAlt /></button></PopoverTrigger>
-                    <PopoverContent></PopoverContent>
+                    <PopoverTrigger><button className="reaction-btn relative top-1"><PiShareFat /></button></PopoverTrigger>
+                    <PopoverContent className="flex gap-4">
+                      <TelegramShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-cyan-500 text-white flex justify-center items-center cursor-pointer text-2xl"><FaTelegramPlane /></button>
+                      </TelegramShareButton>
+                      <FacebookShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-blue-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaFacebookF /></button>
+                      </FacebookShareButton>
+                      <WhatsappShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-green-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaWhatsapp /></button>
+                      </WhatsappShareButton>
+                      <TwitterShareButton url={shareUrl}>
+                      <button className="w-10 h-10 rounded-full bg-cyan-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaXTwitter /></button>
+                      </TwitterShareButton>
+                    </PopoverContent>
                   </Popover>
                   </div>
                   <div className="created-at">
