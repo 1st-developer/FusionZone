@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { postListFn } from "@/redux/slice/postList.slice";
-import Spinner from "@/components/ui/Spinner";
 import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
 import { AiOutlineLike } from "react-icons/ai";
@@ -23,6 +22,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { BsBookmark } from "react-icons/bs";
+import GoldenSpinner from "@/components/ui/goldenSpinner";
 
 
 
@@ -40,7 +40,6 @@ function Body() {
     dispatch(userListFn());
   }, [dispatch]);
 
-  if (postState.loading || userState.loading) return <Spinner />;
   if (postState.error) return <p className="text-red-600 text-xl">{postState.error}</p>;
   if (userState.error) return <p className="text-red-600 text-xl">{userState.error}</p>;
 
@@ -51,7 +50,9 @@ function Body() {
   const shareUrl = window.location.href
 
   return (
-    <div className="item">
+    <div className="all-map">
+      {postState.loading || userState.loading ? <GoldenSpinner />:
+      <div className="item">
       {posts?.map((post) => {
         const user = users.find((u) => u.id === post.user_Id);
 
@@ -112,6 +113,7 @@ function Body() {
             </div>
           </div>
         )})}
+    </div>}
     </div>
   );
 }

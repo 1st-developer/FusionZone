@@ -69,6 +69,7 @@ function Profile() {
         }
       } catch (error) {
         console.error(error);
+        toast.error("CONNECTION_NETWORK_FAILED")
         setLoading(false);
       }
     };

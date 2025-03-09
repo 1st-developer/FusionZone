@@ -1,15 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
-import "../Styles/Body.scss"
+import "../Styles/search.scss"
 import { AppDispatch, RootState } from "@/redux/store"
 import { useEffect } from "react";
 import { searchFn } from "@/redux/slice/search.slice";
-import Spinner from "@/components/ui/Spinner";
 import { useNavigate, useParams } from "react-router-dom";
 import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
 import NotFound from "./notFound";
 import { AiOutlineLike } from "react-icons/ai";
-import { CiBookmarkMinus } from "react-icons/ci";
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Textarea } from "@/components/ui/textarea";
@@ -42,7 +40,6 @@ function Search() {
       }
     }, [dispatch]);
 
-    if (searchState.loading) return <Spinner />;
     if (searchState.error) return <NotFound />
 
     const posts = searchState.data?.posts;
@@ -51,8 +48,9 @@ function Search() {
     const shareUrl = window.location.href
 
     return (
-        <div className="item">
-      {posts?.length ? posts?.map((post) => {
+        <div>
+          {posts?.length ? <div className="search-page">
+      {posts?.map((post) => {
         const user = users?.find((u) => u.id === post.user_Id);
 
         return (
@@ -111,8 +109,9 @@ function Search() {
                 </div>
             </div>
           </div>
-        )}): <NotFound />}
-    </div>
+        )})}
+    </div>: <NotFound />}
+        </div>
     );
 }
 

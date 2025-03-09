@@ -1,119 +1,125 @@
-.item {
-    width: 80%;
-    margin: 5rem auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: center;
+.all-map {
+    width: 100%;
+    height: 100vh;
+    display: flex;
     justify-content: center;
-    gap: 2rem;
-    .creator {
-        position: relative;
-        &:hover {
-            .main {
-                opacity: 1;
-                bottom: 21.3%;
+    align-items: center;
+    .item {
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        .creator {
+            position: relative;
+            &:hover {
+                .main {
+                    opacity: 1;
+                    bottom: 21.3%;
+                }
             }
-        }
-        .main {
-            position: absolute;
-            width: 100%;
-            height: 10vh;
-            bottom: 15%;
-            background: transparent;
-            backdrop-filter: blur(20px);
-            transition: 0.3s;
-            opacity: 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            color: #fff;
-            .class {
+            .main {
+                position: absolute;
+                width: 100%;
+                height: 10vh;
+                bottom: 15%;
+                background: transparent;
+                backdrop-filter: blur(20px);
+                transition: 0.3s;
+                opacity: 0;
                 display: flex;
                 align-items: center;
-                gap: 1rem;
-                .profile {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 30rem;
+                justify-content: space-around;
+                color: #fff;
+                .class {
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                    .profile {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 30rem;
+                        overflow: hidden;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            transition: .3s;
+                            cursor: pointer;
+                            &:hover {
+                                scale: 1.1;
+                            }
+                        }
+                    }
+                    .name {
+                        font-size: 1rem;
+                        font-weight: bold;
+                        line-height: 1.1rem;
+                        font-family: "Playwrite IT Moderna", serif;
+                    }
+                    .email {
+                        font-size: 0.9rem;
+                        font-family: "Playwrite IT Moderna", serif;
+                    }
+                }
+            }
+            .box {
+                width: 25rem;
+                border-radius: 3px;
+                overflow: hidden;
+                color: #000;
+                .image {
+                    width: 100%;
+                    border-radius: 10px 10px 0 0;
+                    user-select: none;
                     overflow: hidden;
                     img {
                         width: 100%;
                         height: 100%;
                         object-fit: cover;
-                        transition: .3s;
-                        cursor: pointer;
-                        &:hover {
-                            scale: 1.1;
-                        }
                     }
                 }
-                .name {
-                    font-size: 1rem;
-                    font-weight: bold;
-                    line-height: 1.1rem;
-                    font-family: "Playwrite IT Moderna", serif;
-                }
-                .email {
-                    font-size: 0.9rem;
-                    font-family: "Playwrite IT Moderna", serif;
-                }
-            }
-        }
-        .box {
-            width: 25rem;
-            border-radius: 3px;
-            overflow: hidden;
-            color: #000;
-            .image {
-                width: 100%;
-                border-radius: 10px 10px 0 0;
-                user-select: none;
-                overflow: hidden;
-                img {
+                .details {
                     width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-            .details {
-                width: 100%;
-                height: 22vh;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                background: #FBF5E5;
-                border-radius: 0 0 10px 10px;
-                padding: 20px;
-                .together {
-                    display: grid;
-                    justify-content: space-between;
-                    align-items: center;
-                    margin-top: 1rem;
-                    gap: 0.8rem;
-                    .btns {
-                        display: flex;
+                    height: 22vh;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    background: #FBF5E5;
+                    border-radius: 0 0 10px 10px;
+                    padding: 20px;
+                    .together {
+                        display: grid;
                         justify-content: space-between;
                         align-items: center;
-                        .reaction {
+                        margin-top: 1rem;
+                        gap: 0.8rem;
+                        .btns {
                             display: flex;
-                            gap: 1rem;
-                            .reaction-btn {
-                                font-size: 1.2rem;
-                                cursor: pointer;
+                            justify-content: space-between;
+                            align-items: center;
+                            .reaction {
+                                display: flex;
+                                gap: 1rem;
+                                .reaction-btn {
+                                    font-size: 1.2rem;
+                                    cursor: pointer;
+                                }
+                            }
+                            .created-at {
+                                font-size: 0.6rem;
+                                font-weight: 500;
+                                font-family: "Playwrite IT Moderna", serif;
                             }
                         }
-                        .created-at {
-                            font-size: 0.6rem;
-                            font-weight: 500;
-                            font-family: "Playwrite IT Moderna", serif;
-                        }
                     }
-                }
-                .name {
-                    font-size: 1.5rem;
-                    line-height: 2.5rem;
-                    font-weight: bold;
-                    font-family: "Big Shoulders Stencil", sans-serif;
+                    .name {
+                        font-size: 1.5rem;
+                        line-height: 2.5rem;
+                        font-weight: bold;
+                        font-family: "Big Shoulders Stencil", sans-serif;
+                    }
                 }
             }
         }
