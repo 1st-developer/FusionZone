@@ -17,7 +17,7 @@ import axios from "axios";
 import GoldenSpinner from "@/components/ui/goldenSpinner";
 import { Textarea } from "@/components/ui/textarea";
 import { AiOutlineLike } from "react-icons/ai";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { BsBookmark } from "react-icons/bs";
 import { PiShareFat } from "react-icons/pi";
 import { CiMenuKebab } from "react-icons/ci";
 import dayjs from "dayjs"
@@ -125,7 +125,23 @@ function Profile() {
           </div>
           <div className="about-edits">
             <Button>Edit profile</Button>
-            <Button>Share profile</Button>
+            <Popover>
+              <PopoverTrigger><Button>Share profile</Button></PopoverTrigger>
+              <PopoverContent className="flex gap-4">
+                <TelegramShareButton url={shareUrl}>
+                <button className="w-10 h-10 rounded-full bg-cyan-500 text-white flex justify-center items-center cursor-pointer text-2xl"><FaTelegramPlane /></button>
+                </TelegramShareButton>
+                <FacebookShareButton url={shareUrl}>
+                <button className="w-10 h-10 rounded-full bg-blue-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaFacebookF /></button>
+                </FacebookShareButton>
+                <WhatsappShareButton url={shareUrl}>
+                <button className="w-10 h-10 rounded-full bg-green-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaWhatsapp /></button>
+                </WhatsappShareButton>
+                <TwitterShareButton url={shareUrl}>
+                <button className="w-10 h-10 rounded-full bg-cyan-600 text-white flex justify-center items-center cursor-pointer text-2xl"><FaXTwitter /></button>
+                </TwitterShareButton>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
         </div>
@@ -152,7 +168,7 @@ function Profile() {
                   <div className="btns">
                   <div className="reaction">
                   <button className="reaction-btn"><AiOutlineLike /></button>
-                  <button className="reaction-btn"><IoMdHeartEmpty /></button>
+                  <button className="reaction-btn"><BsBookmark /></button>
                   <Popover>
                     <PopoverTrigger><button className="reaction-btn relative top-1"><PiShareFat /></button></PopoverTrigger>
                     <PopoverContent className="flex gap-4">

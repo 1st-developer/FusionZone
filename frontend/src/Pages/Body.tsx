@@ -6,7 +6,6 @@ import { postListFn } from "@/redux/slice/postList.slice";
 import Spinner from "@/components/ui/Spinner";
 import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { AiOutlineLike } from "react-icons/ai";
 import { Textarea } from "@/components/ui/textarea"
 import dayjs from "dayjs"
@@ -23,6 +22,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
+import { BsBookmark } from "react-icons/bs";
 
 
 
@@ -84,7 +84,7 @@ function Body() {
                   <div className="btns">
                   <div className="reaction">
                   <button className="reaction-btn"><AiOutlineLike /></button>
-                  <button className="reaction-btn"><IoMdHeartEmpty /></button>
+                  <button className="reaction-btn"><BsBookmark /></button>
                   <Popover>
                     <PopoverTrigger><button className="reaction-btn relative top-1"><PiShareFat /></button></PopoverTrigger>
                     <PopoverContent className="flex gap-4">

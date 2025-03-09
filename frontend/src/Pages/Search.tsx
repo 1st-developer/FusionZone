@@ -9,7 +9,7 @@ import { userListFn } from "@/redux/slice/userList.slice";
 import { Button } from "@/components/ui/button";
 import NotFound from "./notFound";
 import { AiOutlineLike } from "react-icons/ai";
-import { IoMdHeartEmpty } from "react-icons/io";
+import { CiBookmarkMinus } from "react-icons/ci";
 import dayjs from "dayjs"
 import relativeTime from "dayjs/plugin/relativeTime"
 import { Textarea } from "@/components/ui/textarea";
@@ -22,6 +22,7 @@ import { PiShareFat } from "react-icons/pi";
 import { FaFacebookF, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
+import { BsBookmark } from "react-icons/bs";
 
 
 dayjs.extend(relativeTime);
@@ -83,7 +84,7 @@ function Search() {
                   <div className="btns">
                   <div className="reaction">
                   <button className="reaction-btn"><AiOutlineLike /></button>
-                  <button className="reaction-btn"><IoMdHeartEmpty /></button>
+                  <button className="reaction-btn"><BsBookmark /></button>
                   <Popover>
                     <PopoverTrigger><button className="reaction-btn relative top-1"><PiShareFat /></button></PopoverTrigger>
                     <PopoverContent className="flex gap-4">

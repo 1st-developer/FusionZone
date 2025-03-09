@@ -1,7 +1,7 @@
 import "../Styles/itemRight.scss"
 import { Button } from "./ui/button"
 import { IoHome, IoLogOut } from "react-icons/io5";
-import { IoIosContact } from "react-icons/io";
+import { MdOutlineMoveToInbox } from "react-icons/md";
 import { IoMdContact } from "react-icons/io";
 import { IoMdSettings } from "react-icons/io";
 import { MdAccountBalance } from "react-icons/md";
@@ -48,7 +48,7 @@ function ItemRight() {
         <Button><MdOutlineHistory />History</Button>
         <Button><MdFavorite />Favorite</Button>
         <Button><LiaDownloadSolid />Downloads</Button>
-        <Button onClick={() => navigate("/profile")} ><IoIosContact />Profile</Button>
+        <Button><MdOutlineMoveToInbox />In box</Button>
         <Popover>
           <PopoverTrigger><Button><IoMdSettings />Setting</Button></PopoverTrigger>
           <PopoverContent><Theme /></PopoverContent>
