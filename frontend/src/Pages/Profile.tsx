@@ -64,7 +64,6 @@ function Profile() {
           
           if (response.data.secure_url) {
             setImg(response.data.secure_url);
-            window.location.reload();
             setLoading(false);
           }
         }
