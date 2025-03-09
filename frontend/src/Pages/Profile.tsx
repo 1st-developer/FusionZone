@@ -64,6 +64,7 @@ function Profile() {
           
           if (response.data.secure_url) {
             setImg(response.data.secure_url);
+            window.location.reload();
             setLoading(false);
           }
         }
@@ -95,7 +96,7 @@ function Profile() {
     <div className="profile-page">
         <div className="self">
           <div className="back-img">
-          {updated?.profile ? <img src={updated.profile} />: user?.profile ? <img src={user.profile} />: <h2>No Profile</h2>}
+          {loading ? <GoldenSpinner />: updated?.profile ? <img src={updated.profile} />: user?.profile ? <img src={user.profile} />: <h2>No Profile</h2>}
           </div>
         <div className="image-controller">
         <div className="circle">
