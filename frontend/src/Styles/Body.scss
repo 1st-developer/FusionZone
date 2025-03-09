@@ -122,12 +122,6 @@
 
 @media (max-width: 768px) {
     .item {
-        .creator {
-            .main {
-                width: 100%;
-                position: relative;
-                right: 0;
-            }
-        }
+        grid-template-columns: 1fr;
     }
 }
