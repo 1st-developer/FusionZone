@@ -25,6 +25,7 @@ import relativeTime from "dayjs/plugin/relativeTime"
 import { FaFacebookF, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
+import { cloud_name, upload_preset } from "@/Helpers/cloudinary";
 
 
 dayjs.extend(relativeTime);
@@ -50,10 +51,10 @@ function Profile() {
           setLoading(true);
           const data = new FormData();
           data.append("file", file[0]);
-          data.append("upload_preset", "my store");
-          data.append("cloud_name", "dytzmdcdt");
+          data.append("upload_preset", `${upload_preset}`);
+          data.append("cloud_name", `${cloud_name}`);
     
-          const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
+          const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, data,
             {
               headers: {
                 "Content-Type": "multipart/form-data",
@@ -68,6 +69,7 @@ function Profile() {
         }
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     };
     

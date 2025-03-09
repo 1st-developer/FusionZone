@@ -14,6 +14,7 @@ import { FaPlus } from "react-icons/fa6";
 import { IoLockClosed } from "react-icons/io5";
 import { MdEmail } from "react-icons/md";
 import { IoPerson } from "react-icons/io5";
+import { cloud_name, upload_preset } from "@/Helpers/cloudinary";
 
 function Register() {
 
@@ -91,10 +92,10 @@ const [loading, setLoading] = useState(false);
           setLoading(true);
           const data = new FormData();
           data.append("file", file[0]);
-          data.append("upload_preset", "my store");
-          data.append("cloud_name", "dytzmdcdt");
+          data.append("upload_preset", `${upload_preset}`);
+          data.append("cloud_name", `${cloud_name}`);
     
-          const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
+          const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, data,
             {
               headers: {
                 "Content-Type": "multipart/form-data",
@@ -109,6 +110,7 @@ const [loading, setLoading] = useState(false);
         }
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     };
 

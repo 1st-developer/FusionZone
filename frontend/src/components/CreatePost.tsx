@@ -9,8 +9,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import GoldenSpinner from "./ui/goldenSpinner";
 import { Textarea } from "./ui/textarea";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup"
+import { cloud_name, upload_preset } from "@/Helpers/cloudinary";
 
 function CreatePost() {
 
@@ -18,10 +19,7 @@ function CreatePost() {
   const loginState = useSelector((state: RootState) => state.loginSlice);
   const dispatch = useDispatch<AppDispatch>();
 
-  const [nameInput, setNameInput] = useState("");
-
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [img, setImg] = useState("");
   const [loading, setLoading] = useState(false);
 
   const upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,10 +29,10 @@ function CreatePost() {
         setLoading(true);
         const data = new FormData();
         data.append("file", file[0]);
-        data.append("upload_preset", "my store");
-        data.append("cloud_name", "dytzmdcdt");
-  
-        const response = await axios.post("https://api.cloudinary.com/v1_1/dytzmdcdt/image/upload", data,
+          data.append("upload_preset", `${upload_preset}`);
+          data.append("cloud_name", `${cloud_name}`);
+    
+          const response = await axios.post(`https://api.cloudinary.com/v1_1/${cloud_name}/image/upload`, data,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -49,6 +47,7 @@ function CreatePost() {
       }
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   }; 
 
