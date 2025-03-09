@@ -9,7 +9,7 @@ postRouter.post("/create", authenticate,  postSchema, validationMiddleWere, crea
 postRouter.get("/list",  getAllPost);
 postRouter.get("/my-posts", authenticate, MyPosts);
 postRouter.get("/other-posts/:user_Id", getOtherPosts);
-postRouter.delete("/delete/:id", authenticate, deletePost);
+postRouter.delete("/delete/:post_Id", authenticate, deletePost);
 
 
 export default postRouter

@@ -26,6 +26,7 @@ import { FaFacebookF, FaTelegramPlane, FaWhatsapp } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { cloud_name, upload_preset } from "@/Helpers/cloudinary";
+import { deletePostFn } from "@/redux/slice/deletePostSlice";
 
 
 dayjs.extend(relativeTime);
@@ -37,6 +38,7 @@ function Profile() {
     const loginState = useSelector((state: RootState) => state.loginSlice);
     const updateProfileState = useSelector((state: RootState) => state.updateProfileSlice);
     const myPostsState = useSelector((state: RootState) => state.getMyPostsSlice);
+    const deletePostState = useSelector((state: RootState) => state.deletePostSlice);
 
     const token = loginState.data?.token;
     
@@ -189,7 +191,10 @@ function Profile() {
                       </TwitterShareButton>
                     </PopoverContent>
                   </Popover>
-                  <button className="reaction-btn"><CiMenuKebab /></button>
+                  <Popover>
+                    <PopoverTrigger><button className="reaction-btn"><CiMenuKebab /></button></PopoverTrigger>
+                    <PopoverContent><Button className="bg-red-500 hover:bg-red-600" onClick={() =>{ dispatch(deletePostFn({user_Id: user?.id, post_Id: my.id, token: loginState.data?.token}))}} disabled={deletePostState.loading}> {deletePostState.loading ? <GoldenSpinner />: "Delete"}</Button></PopoverContent>
+                  </Popover>
                   </div>
                   <div className="created-at">
                     {dayjs(my.created_At).fromNow(true)}

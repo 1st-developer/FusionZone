@@ -32,3 +32,15 @@ export interface Post {
     updated_At: Date;
     user_Id:    string;
 }
+
+export interface IDeletePostResponse {
+    isSuccess: boolean;
+    Message:   string;
+}
+
+
+export interface IDeletePostBody {
+    post_Id: string;
+    user_Id: string;
+    token: string
+}

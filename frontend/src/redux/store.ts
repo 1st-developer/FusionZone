@@ -8,6 +8,7 @@ import { updateProfileSlice } from "./slice/profile.slice";
 import { getMyPostsSlice } from "./slice/my-post.slice";
 import { createPostSlice } from "./slice/createPost.slice";
 import { otherPostsSlice } from "./slice/otherProfiles.slices";
+import { deletePostSlice } from "./slice/deletePostSlice";
 
 export const store = configureStore({
     reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
         getMyPostsSlice: getMyPostsSlice.reducer,
         createPostSlice: createPostSlice.reducer,
         otherPostsSlice: otherPostsSlice.reducer,
+        deletePostSlice: deletePostSlice.reducer,
     },
     devTools: true 
 });
