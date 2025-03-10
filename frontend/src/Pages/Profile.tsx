@@ -27,6 +27,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { cloud_name, upload_preset } from "@/Helpers/cloudinary";
 import { deletePostFn } from "@/redux/slice/deletePostSlice";
+import { useNavigate } from "react-router-dom";
 
 
 dayjs.extend(relativeTime);
@@ -34,6 +35,7 @@ dayjs.extend(relativeTime);
 
 function Profile() {
 
+    const navigate = useNavigate(); 
     const dispatch = useDispatch<AppDispatch>();
     const loginState = useSelector((state: RootState) => state.loginSlice);
     const updateProfileState = useSelector((state: RootState) => state.updateProfileSlice);
@@ -193,7 +195,7 @@ function Profile() {
                   </Popover>
                   <Popover>
                     <PopoverTrigger><button className="reaction-btn"><CiMenuKebab /></button></PopoverTrigger>
-                    <PopoverContent><Button className="bg-red-500 hover:bg-red-600" onClick={() =>{ dispatch(deletePostFn({user_Id: user?.id, post_Id: my.id, token: loginState.data?.token}))}} disabled={deletePostState.loading}> {deletePostState.loading ? <GoldenSpinner />: "Delete"}</Button></PopoverContent>
+                    <PopoverContent><Button className="bg-red-500 hover:bg-red-600" onClick={() =>{ dispatch(deletePostFn({user_Id: user?.id, post_Id: my.id, token: loginState.data?.token})), toast.success(deletePostState.data.Message), navigate("/")}} disabled={deletePostState.loading}> {deletePostState.loading ? <GoldenSpinner />: "Delete"}</Button></PopoverContent>
                   </Popover>
                   </div>
                   <div className="created-at">

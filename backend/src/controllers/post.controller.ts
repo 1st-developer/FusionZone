@@ -132,11 +132,11 @@ export const getOtherPosts = async (req: Request, res: Response) => {
 export const deletePost = async (req: AuthRequest, res: Response) => {
     try {
 
-        const post_Id = req.body.post_Id;
+        const {post_Id} = req.params;
 
         const findPost = await prisma.posts.findFirst({
             where: {
-                user_Id: post_Id
+                id: post_Id
             }
         });
 

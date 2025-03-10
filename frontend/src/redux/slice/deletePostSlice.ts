@@ -12,7 +12,7 @@ const initialState = {
 
 export const deletePostFn = createAsyncThunk("delete posts", async (data: IDeletePostBody, {rejectWithValue}) => {
     try {
-        const res = await axios.delete(`${BASE_API_URL}/posts/delete/:${data}`, {
+        const res = await axios.delete(`${BASE_API_URL}/posts/delete/${data.post_Id}`, {
             headers: {
                 Authorization: `Barear ${data.token}`
             }
