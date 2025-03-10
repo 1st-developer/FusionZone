@@ -128,7 +128,9 @@
 }
 
 @media (max-width: 768px) {
-    .item {
-        grid-template-columns: 1fr;
+    .all-map {
+        .item {
+            grid-template-columns: 1fr;
+        }
     }
 }
