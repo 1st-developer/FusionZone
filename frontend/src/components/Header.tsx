@@ -52,7 +52,7 @@ function Header() {
   
 
   return (
-    <header>
+    <header className="bg-white dark:bg-black">
         <div className="left">
         <Link to="/profile">
         <div className="profile">

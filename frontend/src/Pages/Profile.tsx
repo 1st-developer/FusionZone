@@ -103,7 +103,7 @@ function Profile() {
           {loading ? <GoldenSpinner />: updated?.profile ? <img src={updated.profile} />: user?.profile ? <img src={user.profile} />: <h2>No Profile</h2>}
           </div>
         <div className="image-controller">
-        <div className="circle">
+        <div className="circle bg-white dark:bg-black">
         {loading ? <GoldenSpinner />: updated?.profile ? <img src={updated.profile} />: user?.profile ? <img src={user.profile} />: <div className="first-word"><h2>{loginState.data?.user?.full_name[0]?.toUpperCase()}</h2></div>}
         <button disabled={loading} onClick={() => fileInputRef.current?.click()}><input 
         type="file" 
@@ -195,7 +195,7 @@ function Profile() {
                   </Popover>
                   <Popover>
                     <PopoverTrigger><button className="reaction-btn"><CiMenuKebab /></button></PopoverTrigger>
-                    <PopoverContent><Button className="bg-red-500 hover:bg-red-600" onClick={() =>{ dispatch(deletePostFn({user_Id: user?.id, post_Id: my.id, token: loginState.data?.token})), toast.success(deletePostState.data.Message), navigate("/")}} disabled={deletePostState.loading}> {deletePostState.loading ? <GoldenSpinner />: "Delete"}</Button></PopoverContent>
+                    <PopoverContent><Button className="bg-red-500 hover:bg-red-600 text-white" onClick={() =>{ dispatch(deletePostFn({user_Id: user?.id, post_Id: my.id, token: loginState.data?.token})), toast.success(deletePostState.data.Message), navigate("/")}} disabled={deletePostState.loading}> {deletePostState.loading ? <GoldenSpinner />: "Delete"}</Button></PopoverContent>
                   </Popover>
                   </div>
                   <div className="created-at">
