@@ -46,7 +46,7 @@ function OtherProfiles() {
           {<img src={findUser?.profile} />}
           </div>
           <div className="image-controller">
-        <div className="circle">
+        <div className="circle bg-white dark:bg-black">
         <img src={findUser?.profile} />
         </div>
         <div className="user-detail">

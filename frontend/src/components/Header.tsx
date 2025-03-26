@@ -55,7 +55,7 @@ function Header() {
     <header className="bg-white dark:bg-black">
         <div className="left">
         <Link to="/profile">
-        <div className="profile">
+        <div className="profile" style={{border: profile?.profile ? "none": user?.profile ? "none": "1px solid #bbb"}}>
          {profile?.profile ?  <img src={profile.profile} /> : user?.profile ?  <img src={user.profile} />: <h2>{user?.full_name[0]?.toUpperCase()}</h2>}
         </div>
         </Link>
