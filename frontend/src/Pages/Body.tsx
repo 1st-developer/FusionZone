@@ -34,6 +34,7 @@ function Body() {
   const dispatch = useDispatch<AppDispatch>();
   const postState = useSelector((state: RootState) => state.PostListSlice);
   const userState = useSelector((state: RootState) => state.userListSlice);
+  const loginState = useSelector((state: RootState) => state.loginSlice);
 
   useEffect(() => {
     dispatch(postListFn());
@@ -51,6 +52,21 @@ function Body() {
 
   return (
     <div className="all-map">
+
+      <div className="status">
+        <div className="add_status"></div>
+        <div className="users">
+          <div className="profile" style={{border: loginState.data?.user?.profile ? "none": "1px solid #bbb"}}>
+            {loginState.data?.user?.profile ? <img src={loginState.data.user.profile} />: <h2 className="text-[3rem] font-bold">{loginState.data?.user?.full_name[0].toUpperCase()}</h2>}
+          </div>
+        </div>
+        <div className="users">
+          <div className="profile">
+            <img src="https://images.pexels.com/photos/31092745/pexels-photo-31092745/free-photo-of-child-in-orange-jacket-in-snowy-istanbul-garden.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
+          </div>
+        </div>
+      </div>
+
       {postState.loading || userState.loading ? <GoldenSpinner />:
       <div className="item">
       {posts?.map((post) => {
