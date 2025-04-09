@@ -18,6 +18,17 @@ model Users {
   updated_At DateTime @updatedAt
   last_login DateTime @default(now())
   Post Posts[]
+  followers  Follow[] @relation("FollowingRelation")
+  followings Follow[] @relation("FollowerRelation")
+}
+
+model Follow {
+  id String @id @default(uuid())
+  follower_id String
+  following_id String
+  folow_at DateTime @default(now())
+  follower     Users    @relation("FollowerRelation", fields: [follower_id], references: [id])
+  following    Users    @relation("FollowingRelation", fields: [following_id], references: [id])
 }
 
 model Posts {

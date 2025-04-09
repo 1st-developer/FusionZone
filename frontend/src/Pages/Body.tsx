@@ -23,6 +23,10 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FacebookShareButton, TelegramShareButton, TwitterShareButton, WhatsappShareButton } from "react-share";
 import { BsBookmark } from "react-icons/bs";
 import GoldenSpinner from "@/components/ui/goldenSpinner";
+import { getMyFollowingFn } from "@/redux/slice/getMyFollowing.slice";
+import { createFollowFn } from "@/redux/slice/follow.slice";
+import toast from "react-hot-toast";
+import { deleteMyFollowingFn } from "@/redux/slice/deleteFollow.slice";
 
 
 
@@ -35,14 +39,24 @@ function Body() {
   const postState = useSelector((state: RootState) => state.PostListSlice);
   const userState = useSelector((state: RootState) => state.userListSlice);
   const loginState = useSelector((state: RootState) => state.loginSlice);
+  const getMyFollowState = useSelector((state: RootState) => state.getMyFollowSlice);
+  const createFollowState = useSelector((state: RootState) => state.createFollowSlice);
+  const deleteMyFollowState = useSelector((state: RootState) => state.deleteMyFollowSlice);
 
   useEffect(() => {
     dispatch(postListFn());
     dispatch(userListFn());
+    dispatch(getMyFollowingFn(loginState.data.token));
   }, [dispatch]);
 
   if (postState.error) return <p className="text-red-600 text-xl">{postState.error}</p>;
   if (userState.error) return <p className="text-red-600 text-xl">{userState.error}</p>;
+  if(createFollowState.data.isSuccess) {
+    toast.success(createFollowState.data.message);
+  }
+  if(createFollowState.error) {
+    toast.error(createFollowState.error);
+  }
 
   const posts = postState.data?.post;
   const users = userState.data?.users;
@@ -60,11 +74,13 @@ function Body() {
             {loginState.data?.user?.profile ? <img src={loginState.data.user.profile} />: <h2 className="text-[3rem] font-bold">{loginState.data?.user?.full_name[0].toUpperCase()}</h2>}
           </div>
         </div>
-        <div className="users">
-          <div className="profile">
-            <img src="https://images.pexels.com/photos/31092745/pexels-photo-31092745/free-photo-of-child-in-orange-jacket-in-snowy-istanbul-garden.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load" />
-          </div>
+        {getMyFollowState.data?.following?.map((u) => 
+        <div className="users" key={u.id}>
+        <div className="profile">
+          {u.profile ? <img src={u.profile} />: []}
         </div>
+        </div>
+         )}
       </div>
 
       {postState.loading || userState.loading ? <GoldenSpinner />:
@@ -86,7 +102,14 @@ function Body() {
                 </div>
                 </div>
                 <div className="follow">
-                  <Button>Follow</Button>
+                  {localStorage.getItem("follow") ? <Button onClick={() => { dispatch(deleteMyFollowingFn({
+                    following_id: user.id,
+                    token: loginState.data.token,
+                  })), localStorage.removeItem("follow")}}>Un follow</Button>:
+                  <Button onClick={() => dispatch(createFollowFn({
+                    following_id: user.id,
+                    token: loginState.data.token
+                  }))}>{createFollowState.loading ? <GoldenSpinner />: "Follow"}</Button>}
                 </div>
               </div>
             )}

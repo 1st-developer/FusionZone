@@ -9,6 +9,9 @@ import { getMyPostsSlice } from "./slice/my-post.slice";
 import { createPostSlice } from "./slice/createPost.slice";
 import { otherPostsSlice } from "./slice/otherProfiles.slices";
 import { deletePostSlice } from "./slice/deletePostSlice";
+import { getMyFollowSlice } from "./slice/getMyFollowing.slice";
+import { createFollowSlice } from "./slice/follow.slice";
+import { deleteMyFollowSlice } from "./slice/deleteFollow.slice";
 
 export const store = configureStore({
     reducer: {
@@ -22,6 +25,9 @@ export const store = configureStore({
         createPostSlice: createPostSlice.reducer,
         otherPostsSlice: otherPostsSlice.reducer,
         deletePostSlice: deletePostSlice.reducer,
+        getMyFollowSlice: getMyFollowSlice.reducer,
+        createFollowSlice: createFollowSlice.reducer,
+        deleteMyFollowSlice: deleteMyFollowSlice.reducer
     },
     devTools: true 
 });
