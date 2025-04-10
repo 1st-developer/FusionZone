@@ -46,17 +46,13 @@ function Body() {
   useEffect(() => {
     dispatch(postListFn());
     dispatch(userListFn());
-    dispatch(getMyFollowingFn(loginState.data.token));
-  }, [dispatch]);
+    if(createFollowState.data.isSuccess || deleteMyFollowState.data.isSuccess) {
+      dispatch(getMyFollowingFn(loginState.data.token));
+    }
+  }, [dispatch, createFollowState.data, deleteMyFollowState.data]);
 
   if (postState.error) return <p className="text-red-600 text-xl">{postState.error}</p>;
   if (userState.error) return <p className="text-red-600 text-xl">{userState.error}</p>;
-  if(createFollowState.data.isSuccess) {
-    toast.success(createFollowState.data.message);
-  }
-  if(createFollowState.error) {
-    toast.error(createFollowState.error);
-  }
 
   const posts = postState.data?.post;
   const users = userState.data?.users;
@@ -77,8 +73,9 @@ function Body() {
         {getMyFollowState.data?.following?.map((u) => 
         <div className="users" key={u.id}>
         <div className="profile">
-          {u.profile ? <img src={u.profile} />: []}
+          {u.profile ? <img src={u.profile} />: null}
         </div>
+        <h2 className="text-center text-sm">{u.full_name}</h2>
         </div>
          )}
       </div>
@@ -102,10 +99,10 @@ function Body() {
                 </div>
                 </div>
                 <div className="follow">
-                  {localStorage.getItem("follow") ? <Button onClick={() => { dispatch(deleteMyFollowingFn({
+                  {getMyFollowState.data?.following?.some(f => f.id === user.id) ? <Button onClick={() => dispatch(deleteMyFollowingFn({
                     following_id: user.id,
                     token: loginState.data.token,
-                  })), localStorage.removeItem("follow")}}>Un follow</Button>:
+                  }))}>Un follow</Button>:
                   <Button onClick={() => dispatch(createFollowFn({
                     following_id: user.id,
                     token: loginState.data.token

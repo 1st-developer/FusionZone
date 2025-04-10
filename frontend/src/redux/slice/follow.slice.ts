@@ -38,14 +38,12 @@ export const createFollowSlice = createSlice({
         builder.addCase(createFollowFn.pending, (state) => {
             state.loading = true;
             state.data = {} as IFollowUserResponse;
-            state.error = ""
+            state.error = "";
         });
         builder.addCase(createFollowFn.fulfilled, (state, action) => {
             state.loading = false;
             state.data = action.payload as IFollowUserResponse;
-            state.error = ""
-
-            localStorage.setItem("follow", JSON.stringify(action.payload));
+            state.error = "";
         });
         builder.addCase(createFollowFn.rejected, (state, action) => {
             state.loading = false;
