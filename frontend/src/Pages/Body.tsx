@@ -25,7 +25,6 @@ import { BsBookmark } from "react-icons/bs";
 import GoldenSpinner from "@/components/ui/goldenSpinner";
 import { getMyFollowingFn } from "@/redux/slice/getMyFollowing.slice";
 import { createFollowFn } from "@/redux/slice/follow.slice";
-import toast from "react-hot-toast";
 import { deleteMyFollowingFn } from "@/redux/slice/deleteFollow.slice";
 
 
